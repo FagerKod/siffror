@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Del två: telefon, decimaler och maskering | Siffror</title><style>
+  body {
+    max-width: 44rem;
+    margin: 2rem auto;
+    padding: 0 1rem 4rem;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.6;
+    color: #1a1a1a;
+    background: #fff;
+  }
+  section { margin: 0 0 3.5rem; }
+  h1 { line-height: 1.3; }
+  h2 { margin-bottom: 0.25rem; }
+  .teststrang { font-size: 1.6rem; margin: 1.25rem 0; }
+  .lyssna { color: #444; }
+  nav ul { padding-left: 1.25rem; }
+  .teknik {
+    margin: 1.5rem 0 0;
+    padding: 0.75rem 1rem;
+    border-left: 4px solid #c9c9c9;
+    background: #f6f6f6;
+    font-size: 0.9rem;
+    color: #333;
+  }
+  .teknik-rubrik {
+    margin: 0 0 0.5rem;
+    font-weight: 600;
+    color: #555;
+  }
+  .teknik pre {
+    margin: 0 0 0.75rem;
+    padding: 0.5rem 0.75rem;
+    background: #fff;
+    border: 1px solid #ddd;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  .teknik dl { margin: 0; }
+  .teknik dt { font-weight: 600; margin-top: 0.5rem; }
+  .teknik dd { margin: 0; }
+  .teknik table { border-collapse: collapse; margin-top: 0.5rem; }
+  .teknik th, .teknik td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.25rem 0.75rem 0.25rem 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+:focus-visible { outline: 3px solid #774200; outline-offset: 4px; }
+summary { cursor: pointer; padding: .5rem 0; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+.teststrang { font-size: clamp(1.1rem, 4vw, 1.6rem); }
+.skip { position: absolute; top: -6rem; } .skip:focus { top: 0; background: white; }
+</style></head>
+<body><a class="skip" href="#main">Hoppa till testfallen</a>
+<header><p><a href="../index.html">Siffror</a> / <a href="../testfall.html">Alla testfall</a></p></header>
+<main id="main"><h1>Del två: telefon, decimaler och maskering</h1>
+<p>Version 3. Läs först i löpande läsning, sedan genom navigering. Dokumentera paneltext och faktiskt hört tal separat. Följ <a href="../testmanual.html">testmanualen</a>.</p>
+<p>Låt de tekniska detaljerna vara stängda tills du dokumenterat observationen. Alla kan öppna dem efteråt. Teststrängarna är endast till för observation; aktivera inte telefonlänken. Testknappen genomför ingen betalning. Tc-06 och tc-07 är teknikjämförelser och ska inte kopieras som standardlösningar.</p>
+<nav><h2>Testfall på sidan</h2><ul><li><a href="#tc-08">tc-08</a></li><li><a href="#tc-09">tc-09</a></li><li><a href="#tc-10">tc-10</a></li><li><a href="#tc-11">tc-11</a></li></ul></nav>
+<section id="tc-08">
+<h2>tc-08, sifferföljd C</h2>
+  <!-- Separator: U+0020, vanligt blanksteg. Får inte bytas mot &#160;. -->
+  <p class="teststrang" data-tc="tc-08">070 123 45 67</p>
+  <p class="lyssna">Lyssna efter: går det att uppfatta och skriva ner sifferföljden, och hjälper grupperingen?</p>
+<details class="teknik"><summary>Tekniska detaljer för tc-08</summary><p>Jämför värde eller sifferföljd, enhet och sammanhang. Bedöm enligt vägledningen; något visst uttal är inte förutbestämt.</p><pre><code>&lt;p class=&quot;teststrang&quot; data-tc=&quot;tc-08&quot;&gt;070 123 45 67&lt;/p&gt;</code></pre></details>
+</section><section id="tc-09">
+<h2>tc-09, värde A</h2>
+  <!-- Decimalkomma U+002C, inget grupperingstecken. Blanksteget före enheten är U+0020. -->
+  <p class="teststrang" data-tc="tc-09">0,3120 euro</p>
+  <p class="lyssna">Lyssna efter: hur läses delen efter kommat, och går det att höra skillnad mot ett värde med en decimal färre?</p>
+<details class="teknik"><summary>Tekniska detaljer för tc-09</summary><p>Jämför värde eller sifferföljd, enhet och sammanhang. Bedöm enligt vägledningen; något visst uttal är inte förutbestämt.</p><pre><code>&lt;p class=&quot;teststrang&quot; data-tc=&quot;tc-09&quot;&gt;0,3120 euro&lt;/p&gt;</code></pre></details>
+</section><section id="tc-10">
+<h2>tc-10, sifferföljd D</h2>
+  <!-- Skiljetecken: vanligt bindestreck U+002D. Får inte bytas mot U+2010 eller annat streck. -->
+  <p class="teststrang" data-tc="tc-10">19770311-0376</p>
+  <p class="lyssna">Lyssna efter: hur uttalas strecket, och går hela sifferföljden att skriva ner?</p>
+<details class="teknik"><summary>Tekniska detaljer för tc-10</summary><p>Jämför värde eller sifferföljd, enhet och sammanhang. Bedöm enligt vägledningen; något visst uttal är inte förutbestämt.</p><pre><code>&lt;p class=&quot;teststrang&quot; data-tc=&quot;tc-10&quot;&gt;19770311-0376&lt;/p&gt;</code></pre></details>
+</section><section id="tc-11">
+<h2>tc-11, sifferföljd E</h2>
+  <!-- Separator: U+0020. Maskeringstecken: asterisk U+002A, åtta stycken. -->
+  <p class="teststrang" data-tc="tc-11">5226 **** **** 5963</p>
+  <p class="lyssna">Lyssna efter: framgår det att siffror har dolts, och framgår det hur många?</p>
+<details class="teknik"><summary>Tekniska detaljer för tc-11</summary><p>Jämför värde eller sifferföljd, enhet och sammanhang. Bedöm enligt vägledningen; något visst uttal är inte förutbestämt.</p><pre><code>&lt;p class=&quot;teststrang&quot; data-tc=&quot;tc-11&quot;&gt;5226 **** **** 5963&lt;/p&gt;</code></pre></details>
+</section>
+</main><footer><p><a href="../testfall.html">Till alla testfall</a> · <a href="../resultatmall.html">Resultatmall</a></p></footer></body></html>

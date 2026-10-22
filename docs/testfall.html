@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Testfall för uppläsning · Siffror</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Hoppa till innehållet</a>
+<header><a class="brand" href="index.html">Siffror</a><p>Vägledning och testunderlag</p>
+<nav aria-label="Huvudmeny"><ul>
+<li><a href="vagledning.html">Vägledning</a></li>
+<li><a href="testfall.html">Testfall</a></li>
+<li><a href="testmanual.html">Testmanual</a></li>
+<li><a href="resultat.html">Resultat</a></li>
+</ul></nav></header>
+<main id="main" tabindex="-1"><h1 id="testfall-for-upplasning">Testfall för uppläsning</h1>
+<p>Testsviten innehåller 21 jämförelsefall. Test-ID:n, siffersträngar, separatorer och de prövade HTML-elementen är bevarade från originalet. Sidornas instruktioner och navigering har uppdaterats i version 3.</p>
+<nav class="toc" aria-label="På sidan"><strong>På sidan</strong><ul><li><a href="#tre-testsidor">Tre testsidor</a></li><li><a href="#vad-jamfors">Vad jämförs</a></li><li><a href="#tekniska-detaljer-finns-for-alla">Tekniska detaljer finns för alla</a></li><li><a href="#vad-sviten-inte-tacker">Vad sviten inte täcker</a></li></ul></nav>
+<h2 id="tre-testsidor">Tre testsidor</h2>
+<ul>
+<li><a href="testfall/index.html">Del ett — belopp och identifierare, tc-01 till tc-07</a></li>
+<li><a href="testfall/identifierare.html">Del två — telefonnummer, decimaler och maskering, tc-08 till tc-11</a></li>
+<li><a href="testfall/sammanhang.html">Del tre — tecken och sammanhang, tc-12 till tc-21</a></li>
+</ul>
+<p>Läs <a href="testmanual.html">testmanualen</a> innan du börjar. Använd <a href="resultatmall.html">resultatmallen</a> för en körning per miljö.</p>
+<h2 id="vad-jamfors">Vad jämförs</h2>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Tabell: Vad jämförs"><table><thead><tr>
+<th scope="col">Testfall</th>
+<th scope="col">Innehåll</th>
+</tr></thead><tbody>
+<tr><td>tc-01–03</td><td>Samma belopp med hårt mellanslag, vanligt mellanslag och utan gruppering.</td></tr>
+<tr><td>tc-04–05</td><td>Samma 16-siffriga identifierare med och utan gruppering.</td></tr>
+<tr><td>tc-06</td><td>Synlig text med aria-hidden och en visuellt dold dubblett. En mekanismjämförelse, inte rekommenderad standardlösning.</td></tr>
+<tr><td>tc-07</td><td>aria-label på span. Avsiktligt felaktig ARIA-användning för observation, aldrig en godkänd implementationsmall.</td></tr>
+<tr><td>tc-08–11</td><td>Telefonnummer, decimalvärde, personnummerliknande sträng och maskerat nummer.</td></tr>
+<tr><td>tc-12–13</td><td>Negativa belopp med U+002D respektive U+2212.</td></tr>
+<tr><td>tc-14–15</td><td>Grupperat decimalbelopp och valutakod.</td></tr>
+<tr><td>tc-16–18</td><td>Telefonlänk, betalningsknapp utan funktion och belopp i tabell.</td></tr>
+<tr><td>tc-19–21</td><td>Procent, kvadratmeter och smalt hårt mellanslag.</td></tr>
+</tbody></table></div>
+<p>Teststrängarna är endast till för observation. Aktivera inte telefonlänken. De är inte validerade som verkliga OCR-, kort- eller personnummer.</p>
+<h2 id="tekniska-detaljer-finns-for-alla">Tekniska detaljer finns för alla</h2>
+<p>Varje fall har en stängd detaljruta. Öppna den efter att du dokumenterat uppläsningen. Rutorna är tillgängliga även för den som använder skärmläsare; de är inte dolda med aria-hidden.</p>
+<p>Detaljrutorna visar faktisk markup. Teststrängen ändras inte när en ruta öppnas. Ingen JavaScript-kod körs på testsidorna.</p>
+<h2 id="vad-sviten-inte-tacker">Vad sviten inte täcker</h2>
+<p>Sviten är ett stöd för undersökning, inte en fullständig kravgranskning. Komplettera i tjänstens riktiga gränssnitt med inmatning, kopiering, statusändringar, zoom, små vyer, relevanta gränsvärden, mobil och punktskrift.</p></main>
+<footer><p>Version 3 · 22 oktober 2026 · <a href="kallor.html">Källor och faktakontroll</a></p>
+<p><a href="https://github.com/FagerKod/siffror/blob/main/content/testfall.md">Dokumentets källfil på GitHub</a></p></footer>
+</body>
+</html>

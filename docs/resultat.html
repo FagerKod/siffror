@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resultat och kvarstående tester · Siffror</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Hoppa till innehållet</a>
+<header><a class="brand" href="index.html">Siffror</a><p>Vägledning och testunderlag</p>
+<nav aria-label="Huvudmeny"><ul>
+<li><a href="vagledning.html">Vägledning</a></li>
+<li><a href="testfall.html">Testfall</a></li>
+<li><a href="testmanual.html">Testmanual</a></li>
+<li><a href="resultat.html">Resultat</a></li>
+</ul></nav></header>
+<main id="main" tabindex="-1"><h1 id="resultat-och-kvarstaende-tester">Resultat och kvarstående tester</h1>
+<p>De tidigare observationerna nedan kommer från projektets ursprungliga testanteckningar. De har inte körts om vid faktakontrollen den 22 oktober 2026. Skärmläsarversioner, OS-versioner, webbläsarversioner, röster och symbolinställningar saknas för de ursprungliga körningarna.</p>
+<p><strong>Status: historiska observationer med ofullständig miljöinformation.</strong> De visar vad som antecknades, inte hur alla versioner av NVDA eller VoiceOver fungerar.</p>
+<nav class="toc" aria-label="På sidan"><strong>På sidan</strong><ul><li><a href="#tidigare-observationer">Tidigare observationer</a></li><li><a href="#vad-resultaten-inte-visar">Vad resultaten inte visar</a></li><li><a href="#aterstar-att-verifiera">Återstår att verifiera</a></li><li><a href="#nya-resultat">Nya resultat</a></li></ul></nav>
+<h2 id="tidigare-observationer">Tidigare observationer</h2>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Tabell: Tidigare observationer"><table><thead><tr>
+<th scope="col">Testfall</th>
+<th scope="col">VoiceOver på macOS</th>
+<th scope="col">NVDA på Windows</th>
+</tr></thead><tbody>
+<tr><td>tc-01–03, grupperade och ogrupperade belopp</td><td>Samma sammanhängande belopp antecknat i alla tre fall.</td><td>Samma sammanhängande belopp antecknat i alla tre fall.</td></tr>
+<tr><td>tc-04, grupperad identifierare</td><td>Fyra talgrupper antecknade.</td><td>Svårtolkad transkription. Kan inte användas för säker slutsats om sifferföljden.</td></tr>
+<tr><td>tc-05, ogrupperad identifierare</td><td>Siffervis uppläsning antecknad.</td><td>Uppläsning som stort heltal antecknad. Praktisk verifierbarhet är inte testad.</td></tr>
+<tr><td>tc-06, dold alternativ text</td><td>Beloppet antecknat en gång.</td><td>Beloppet antecknat en gång.</td></tr>
+<tr><td>tc-07, aria-label på span</td><td>Dubbel uppläsning och ”grupp” antecknat.</td><td>Ett belopp antecknat; det visar inte vilken textrepresentation som användes.</td></tr>
+<tr><td>tc-08, telefonnummer</td><td>Inledande nolla antecknad; den visuella gruppen 123 återgavs som ”ett tjugotre”.</td><td>Inledande nolla och gruppvis läsning antecknade.</td></tr>
+<tr><td>tc-09, decimaler</td><td>”noll euro komma tre ett två noll” antecknat.</td><td>”noll komma tre ett två noll euro” antecknat.</td></tr>
+<tr><td>tc-10, personnummerliknande sträng</td><td>Strecket saknas i transkriptionen.</td><td>Strecket återgavs som ”till”.</td></tr>
+<tr><td>tc-11, maskering</td><td>Åtta stjärnor antecknade.</td><td>Inga asterisker antecknade. Orsaken är inte fastställd.</td></tr>
+</tbody></table></div>
+<p>De ursprungliga anteckningarna bevaras oförändrade i repots <code>underlag/testresultat-original.md</code>. Exemplen är teststrängar för uppläsning och ska inte användas för att initiera betalningar, samtal eller identifiering av personer.</p>
+<h2 id="vad-resultaten-inte-visar">Vad resultaten inte visar</h2>
+<p>De bevisar inte att separatorer alltid är betydelselösa, att identifierare aldrig kan formateras användbart, att ett bindestreck aldrig uttalas som minus eller att teckennavigering alltid fungerar praktiskt. De visar inte heller att U+2010 skulle hjälpa eller inte hjälpa; den varianten testades inte.</p>
+<p>För tc-06 går det inte att bevisa vilken representation som lästes enbart genom ett identiskt uttal. Teknisk inspektion och separata mekanismtester kan behövas. För tc-07 är standardfrågan redan avgjord: namngivning på ett vanligt span är förbjuden, oavsett uppläsningsresultat. <a href="kallor.html#k13">K13</a></p>
+<h2 id="aterstar-att-verifiera">Återstår att verifiera</h2>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Tabell: Återstår att verifiera"><table><thead><tr>
+<th scope="col">Område</th>
+<th scope="col">Nästa kontroll</th>
+</tr></thead><tbody>
+<tr><td>Tidigare testfall tc-01–11</td><td>Nya reproducerbara körningar med fullständig metadata. Prioritera avvikelserna men uteslut inte övriga fall.</td></tr>
+<tr><td>tc-04</td><td>Spara paneltext och hört tal var för sig. Rekonstruera sifferföljden utan att anta att den äldre transkriptionen var korrekt eller felhörd.</td></tr>
+<tr><td>Teckennavigering</td><td>Kör framför allt tc-04, tc-05, tc-09, tc-10 och tc-11. Bedöm både åtkomst och praktisk användbarhet.</td></tr>
+<tr><td>tc-12 och tc-13</td><td>Kontrollera negativa belopp med U+002D respektive U+2212.</td></tr>
+<tr><td>tc-14–21</td><td>Decimaler, valutakod, telefonlänk, knapp, tabell, procent, kvadratmeter och smalt hårt mellanslag. Inga resultat finns i underlaget.</td></tr>
+<tr><td>Symbolnivå</td><td>Kör maskering och negativa värden med dokumenterade nivåer.</td></tr>
+<tr><td>Mobil och punktskrift</td><td>Egna körningar krävs innan slutsatserna utvidgas till dessa användningssätt.</td></tr>
+<tr><td>Verkliga komponenter</td><td>Kontrollera även inmatning, kopiering, layout, statusändringar, nollvärden, långa värden och inledande nollor. De 21 statiska fallen täcker inte detta fullt ut.</td></tr>
+</tbody></table></div>
+<h2 id="nya-resultat">Nya resultat</h2>
+<p>Inga nya skärmläsarresultat har lagts till. Använd <a href="resultatmall.html">resultatmallen</a> och dokumentera en körning per miljö. Källkontroll och automatisk kodverifiering ska inte registreras som godkända uppläsningstester.</p></main>
+<footer><p>Version 3 · 22 oktober 2026 · <a href="kallor.html">Källor och faktakontroll</a></p>
+<p><a href="https://github.com/FagerKod/siffror/blob/main/content/resultat.md">Dokumentets källfil på GitHub</a></p></footer>
+</body>
+</html>
