@@ -17,7 +17,7 @@
 </ul></nav></header>
 <main id="main" tabindex="-1"><h1 id="for-utvecklare">För utvecklare</h1>
 <p>Utgå från vanlig text och tydlig HTML. Synlig information och information för hjälpmedel ska stämma överens. Undvik separata uttalsversioner av synliga tal.</p>
-<nav class="toc" aria-label="På sidan"><strong>På sidan</strong><ul><li><a href="#belopp-och-precision">Belopp och precision</a></li><li><a href="#nummer-ar-strangar">Nummer är strängar</a></li><li><a href="#kontrollerade-falt-i-react">Kontrollerade fält i React</a></li><li><a href="#ikonknappar-behover-namn">Ikonknappar behöver namn</a></li><li><a href="#sammanhang-och-uppdateringar">Sammanhang och uppdateringar</a></li><li><a href="#lasbarhet-och-kontroll">Läsbarhet och kontroll</a></li></ul></nav>
+<nav class="toc" aria-label="På sidan"><strong>På sidan</strong><ul><li><a href="#belopp-och-precision">Belopp och precision</a></li><li><a href="#nummer-ar-strangar">Nummer är strängar</a></li><li><a href="#kontrollerade-falt-i-react">Kontrollerade fält i React</a></li><li><a href="#ikonknappar-behover-namn">Ikonknappar behöver namn</a></li><li><a href="#sammanhang-och-uppdateringar">Sammanhang och uppdateringar</a></li><li><a href="#lasbarhet-och-kontroll">Läsbarhet och kontroll</a></li><li><a href="#kompletta-react-exempel">Kompletta React-exempel</a></li></ul></nav>
 <h2 id="belopp-och-precision">Belopp och precision</h2>
 <p>Använd samma formatterade text i gränssnittets berörda delar. Bestäm precision per uppgift. Två decimaler passar inte alla värden. Bevara tecken och enhet i texten; färg ensam räcker inte för minus.</p>
 <pre tabindex="0" aria-label="Kodexempel"><code>&lt;p&gt;Lönekonto, saldo 1 234,50 kr&lt;/p&gt;
@@ -56,7 +56,13 @@
 <p>Skapa regionen innan texten uppdateras. Lägg inte hela gränssnittet i en live-region. En ändring behöver inte alltid annonseras automatiskt. <a href="testfall/sammanhang.html">Prova betalningsövningen</a>.</p>
 <h2 id="lasbarhet-och-kontroll">Läsbarhet och kontroll</h2>
 <p>Ange svenska som sidans språk med lang=&quot;sv&quot;. Håll belopp, valuta och sammanhang begripliga. Kontrollera radbrytning, förstoring och kopiering i de faktiska komponenterna. Långa nummer får inte kapas. Visa vad maskering betyder, exempelvis ”Kort som slutar på 5963”, och lägg inte maskerade siffror i dold text.</p>
-<p><a href="kallor.html">Primärkällorna</a> ger stöd för HTML, React, tillgängliga namn och statusmeddelanden.</p></main>
+<p><a href="kallor.html">Primärkällorna</a> ger stöd för HTML, React, tillgängliga namn och statusmeddelanden.</p>
+<h2 id="kompletta-react-exempel">Kompletta React-exempel</h2>
+<ul>
+<li><a href="testfall/identifierare.html#ocr-react">OCR med validering och kopiering</a>. Sträng i state, hjälptext, felhantering och tillgänglig återkoppling.</li>
+<li><a href="testfall/sammanhang.html#betalning-react">Belopp med gemensamt state</a>. Konto, belopp och valuta styr sammanställning och knapptext.</li>
+</ul>
+<p>Exemplen är utfällbara på övningssidorna och går att hämta som JSX-filer. De är kompletta komponenter för ett befintligt React-projekt, inte en färdig bankintegration. Anpassa dem till tjänstens regler och prova dem med skärmläsare.</p></main>
 <footer><p>Version 4 · 27 oktober 2026 · <a href="kallor.html">Källor</a></p>
 <p><a href="https://github.com/FagerKod/siffror/blob/main/content/vagledning.md">Dokumentets källfil på GitHub</a></p></footer>
 </body>

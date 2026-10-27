@@ -26,7 +26,106 @@
 &lt;input id=&quot;amount&quot; name=&quot;amount&quot; type=&quot;text&quot; inputmode=&quot;decimal&quot;&gt;
 &lt;p&gt;Betalning från Lönekonto: 1 234,50 kr&lt;/p&gt;
 &lt;button type=&quot;submit&quot;&gt;Betala 1 234,50 kr&lt;/button&gt;
-&lt;p role=&quot;status&quot;&gt;&lt;/p&gt;</code></pre><p>All uppdatering utgår från de aktuella fältvärdena. Fälttexten ändras inte under inmatning. Här används två decimaler enligt övningens formatregler. I React kan sammanställning och knapptext härledas från samma state. Statusregionen uppdateras vid bekräftelsen; hela formuläret är inte en live-region.</p></details></section></main>
+&lt;p role=&quot;status&quot;&gt;&lt;/p&gt;</code></pre><p>All uppdatering utgår från de aktuella fältvärdena. Fälttexten ändras inte under inmatning. Här används två decimaler enligt övningens formatregler. I React kan sammanställning och knapptext härledas från samma state. Statusregionen uppdateras vid bekräftelsen; hela formuläret är inte en live-region.</p></details><details id="betalning-react"><summary>Komplett React-exempel för ändrade belopp</summary>
+<p>Konto, belopp och valuta ligger i state. Sammanställning och knapptext härleds från dessa värden vid varje rendering. Tomt är ett eget tillstånd. Fel visas vid försök att bekräfta och tidigare återkoppling rensas vid redigering.</p><p>Komplett komponent för ett befintligt React-projekt med stöd för JSX och Hooks. Spara som PaymentExample.jsx, importera komponenten och rendera &lt;PaymentExample /&gt;. Sidans körbara övning ovan använder vanlig HTML och JavaScript; detta visar motsvarande mönster i React.</p>
+<p>Övningen använder två decimaler för SEK och EUR och heltal av typen BigInt för hundradelar. Anpassa precision, beloppsgränser och validering till tjänstens regler. Detta är en gränssnittsövning utan betalningsanrop.</p><p>useId ger unika kopplingar mellan etiketter, hjälptexter och fält även om flera instanser visas. Statusregionen finns från början och uppdateras vid återkoppling. ARIA beskriver funktion, relationer och tillstånd, inte ett särskilt uttal av synliga tal.</p>
+<p><a href="../react/PaymentExample.jsx" download>Hämta PaymentExample.jsx</a></p>
+<pre><code>import { useEffect, useId, useRef, useState } from &#x27;react&#x27;;
+
+function parseAmount(raw) {
+  const text = raw.trim();
+  if (!text) return { error: &#x27;Ange ett belopp.&#x27;, empty: true };
+  if (!/^(?:\d+|\d{1,3}(?:[ \u00a0\u202f]\d{3})+)(?:[,.]\d{1,2})?$/.test(text)) {
+    return { error: &#x27;Ange ett positivt belopp med högst två decimaler och korrekt tusentalsgruppering.&#x27; };
+  }
+  const [whole, fraction = &#x27;&#x27;] = text.replace(/[ \u00a0\u202f]/g, &#x27;&#x27;).split(/[,.]/);
+  const cents = BigInt(whole) * 100n + BigInt(fraction.padEnd(2, &#x27;0&#x27;));
+  if (cents === 0n) return { error: &#x27;Beloppet måste vara större än noll.&#x27; };
+  if (cents &gt; 99999999999n) return { error: &#x27;Ange högst 999 999 999,99.&#x27; };
+  return { cents };
+}
+
+function formatAmount(cents, currency) {
+  const whole = (cents / 100n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, &#x27; &#x27;);
+  const decimals = (cents % 100n).toString().padStart(2, &#x27;0&#x27;);
+  return `${whole},${decimals} ${currency === &#x27;EUR&#x27; ? &#x27;EUR&#x27; : &#x27;kr&#x27;}`;
+}
+
+export default function PaymentExample() {
+  const id = useId();
+  const amountRef = useRef(null);
+  const [account, setAccount] = useState(&#x27;Lönekonto&#x27;);
+  const [amount, setAmount] = useState(&#x27;1 234,50&#x27;);
+  const [currency, setCurrency] = useState(&#x27;SEK&#x27;);
+  const [error, setError] = useState(&#x27;&#x27;);
+  const [status, setStatus] = useState(&#x27;&#x27;);
+
+  useEffect(() =&gt; {
+    if (error) amountRef.current?.focus();
+  }, [error]);
+
+  // Härled presentationen från samma state, inte separata kopior i state.
+  const result = parseAmount(amount);
+  const formatted = result.error ? null : formatAmount(result.cents, currency);
+  const summary = formatted
+    ? `Betalning från ${account}: ${formatted}`
+    : `Betalning från ${account}: ${result.empty ? &#x27;Belopp saknas&#x27; : &#x27;Beloppet behöver kontrolleras&#x27;} (${currency}).`;
+
+  function clearFeedback() {
+    setError(&#x27;&#x27;);
+    setStatus(&#x27;&#x27;);
+  }
+
+  function submit(event) {
+    event.preventDefault();
+    if (result.error) {
+      setError(result.error);
+      setStatus(&#x27;&#x27;);
+      return;
+    }
+    setError(&#x27;&#x27;);
+    setStatus(`Övningen är klar. ${summary}. Ingen betalning har genomförts.`);
+  }
+
+  return (
+    &lt;section aria-labelledby={`${id}-title`}&gt;
+      &lt;h2 id={`${id}-title`}&gt;Betalningsövning&lt;/h2&gt;
+      &lt;p&gt;Ingen betalning genomförs. Inga uppgifter skickas eller sparas.&lt;/p&gt;
+      &lt;form onSubmit={submit} noValidate&gt;
+        &lt;label htmlFor={`${id}-account`}&gt;Från konto&lt;/label&gt;
+        &lt;select id={`${id}-account`} name=&quot;account&quot; value={account}
+          onChange={event =&gt; { setAccount(event.target.value); clearFeedback(); }}&gt;
+          &lt;option value=&quot;Lönekonto&quot;&gt;Lönekonto&lt;/option&gt;
+          &lt;option value=&quot;Sparkonto&quot;&gt;Sparkonto&lt;/option&gt;
+        &lt;/select&gt;
+        &lt;label htmlFor={`${id}-amount`}&gt;Belopp&lt;/label&gt;
+        &lt;p id={`${id}-help`}&gt;
+          Ange ett positivt belopp med högst två decimaler, exempelvis 1 234,50.
+          Högst 999 999 999,99. Mellanslag får gruppera tusental.
+        &lt;/p&gt;
+        &lt;input ref={amountRef} id={`${id}-amount`} name=&quot;amount&quot;
+          type=&quot;text&quot; inputMode=&quot;decimal&quot; value={amount}
+          onChange={event =&gt; { setAmount(event.target.value); clearFeedback(); }}
+          aria-describedby={`${id}-help ${id}-error`}
+          aria-invalid={error ? true : undefined}
+        /&gt;
+        &lt;p id={`${id}-error`}&gt;{error}&lt;/p&gt;
+        &lt;label htmlFor={`${id}-currency`}&gt;Valuta&lt;/label&gt;
+        &lt;select id={`${id}-currency`} name=&quot;currency&quot; value={currency}
+          onChange={event =&gt; { setCurrency(event.target.value); clearFeedback(); }}&gt;
+          &lt;option value=&quot;SEK&quot;&gt;SEK&lt;/option&gt;
+          &lt;option value=&quot;EUR&quot;&gt;EUR&lt;/option&gt;
+        &lt;/select&gt;
+        &lt;p&gt;{summary}&lt;/p&gt;
+        &lt;button type=&quot;submit&quot;&gt;
+          {formatted ? `Betala ${formatted}` : &#x27;Kontrollera betalningsuppgifterna&#x27;}
+        &lt;/button&gt;
+      &lt;/form&gt;
+      &lt;p role=&quot;status&quot;&gt;{status}&lt;/p&gt;
+    &lt;/section&gt;
+  );
+}
+</code></pre></details></section></main>
 <footer><p>Version 4 · 27 oktober 2026 · <a href="../kallor.html">Källor</a></p>
 <p><a href="https://github.com/FagerKod/siffror/blob/main/docs/testfall/sammanhang.html">Dokumentets källfil på GitHub</a></p></footer>
 <script src="../examples.js" defer></script></body>

@@ -24,7 +24,119 @@
 &lt;button type=&quot;button&quot; aria-label=&quot;Kopiera OCR-nummer&quot;&gt;
   &lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot;&gt;...&lt;/svg&gt;
 &lt;/button&gt;
-&lt;p role=&quot;status&quot;&gt;&lt;/p&gt;</code></pre><p>Namnet beskriver ikonknappens funktion. Det är ingen uttalsversion av OCR-numret. Kodutdraget visar semantiken; sidans JavaScript sköter validering, förhandsvisning och kopiering. Använd tjänstens verkliga OCR-regler i en produkt.</p></details></section><section id="konto"><h2>Kontonummer och IBAN</h2><p><strong>Krav:</strong> Nummer ska bevara inledande nollor och IBAN även bokstäver.</p>
+&lt;p role=&quot;status&quot;&gt;&lt;/p&gt;</code></pre><p>Namnet beskriver ikonknappens funktion. Det är ingen uttalsversion av OCR-numret. Kodutdraget visar semantiken; sidans JavaScript sköter validering, förhandsvisning och kopiering. Använd tjänstens verkliga OCR-regler i en produkt.</p></details><details id="ocr-react"><summary>Komplett React-exempel för OCR och kopiering</summary>
+<p>Fältets text behålls som en sträng. Formatkontrollen tar bort tillåtna mellanslag i sitt resultat men ändrar inte inmatningen. Kopieringen hanterar både lyckat och misslyckat försök. En versionsräknare hindrar en försenad kopieringsbekräftelse från att gälla ett nyredigerat värde.</p><p>Komplett komponent för ett befintligt React-projekt med stöd för JSX och Hooks. Spara som OcrExample.jsx, importera komponenten och rendera &lt;OcrExample /&gt;. Sidans körbara övning ovan använder vanlig HTML och JavaScript; detta visar motsvarande mönster i React.</p>
+<p>Anpassa valideringen till tjänstens OCR-regler och kontrollera också på servern. Clipboard API kräver en säker kontext, exempelvis HTTPS, och webbläsarens tillåtelse.</p><p>useId ger unika kopplingar mellan etiketter, hjälptexter och fält även om flera instanser visas. Statusregionen finns från början och uppdateras vid återkoppling. ARIA beskriver funktion, relationer och tillstånd, inte ett särskilt uttal av synliga tal.</p>
+<p><a href="../react/OcrExample.jsx" download>Hämta OcrExample.jsx</a></p>
+<pre><code>import { useEffect, useId, useRef, useState } from &#x27;react&#x27;;
+
+export default function OcrExample() {
+  const id = useId();
+  const inputRef = useRef(null);
+  const revision = useRef(0);
+  const [ocr, setOcr] = useState(&#x27;0012 3456 7890&#x27;);
+  const [error, setError] = useState(&#x27;&#x27;);
+  const [status, setStatus] = useState(&#x27;&#x27;);
+
+  useEffect(() =&gt; {
+    if (error) inputRef.current?.focus();
+  }, [error]);
+  const [copying, setCopying] = useState(false);
+
+  // Formatövning, inte kontroll av kontrollsiffra eller mottagare.
+  function validate(value) {
+    if (!value.trim()) return &#x27;Ange ett OCR-nummer. Tomt är inte noll.&#x27;;
+    if (!/^[0-9 \u00a0\u202f]+$/.test(value)) {
+      return &#x27;Använd endast siffror och mellanslag i denna övning.&#x27;;
+    }
+    return &#x27;&#x27;;
+  }
+
+  function change(event) {
+    revision.current += 1;
+    setOcr(event.target.value); // Behåll texten och markörpositionen.
+    setError(&#x27;&#x27;);
+    setStatus(&#x27;&#x27;);
+  }
+
+  function check(event) {
+    event.preventDefault();
+    const message = validate(ocr);
+    setError(message);
+    setStatus(&#x27;&#x27;);
+    if (message) {
+      return;
+    }
+    const normalized = ocr.replace(/[ \u00a0\u202f]/g, &#x27;&#x27;);
+    setStatus(`Formatet är godkänt för övningen. Utan mellanslag: ${normalized}. Kontrollsiffra och mottagare har inte kontrollerats.`);
+  }
+
+  async function copy() {
+    if (copying) return;
+    const message = validate(ocr);
+    setError(message);
+    setStatus(&#x27;&#x27;);
+    if (message) {
+      return;
+    }
+    const copiedValue = ocr;
+    const copiedRevision = revision.current;
+    setCopying(true);
+    try {
+      await navigator.clipboard.writeText(copiedValue);
+      // Bekräfta inte ett gammalt värde om användaren hunnit redigera.
+      if (revision.current === copiedRevision) {
+        setStatus(&#x27;OCR-numret har kopierats, inklusive mellanslag.&#x27;);
+      }
+    } catch {
+      if (revision.current === copiedRevision) {
+        setStatus(&#x27;Kopieringen lyckades inte. Markera och kopiera texten i fältet manuellt.&#x27;);
+      }
+    } finally {
+      setCopying(false);
+    }
+  }
+
+  return (
+    &lt;section aria-labelledby={`${id}-title`}&gt;
+      &lt;h2 id={`${id}-title`}&gt;OCR och kopiering&lt;/h2&gt;
+      &lt;form onSubmit={check} noValidate&gt;
+        &lt;label htmlFor={`${id}-ocr`}&gt;OCR-nummer&lt;/label&gt;
+        &lt;p id={`${id}-help`}&gt;
+          Använd exempeluppgifter. Mellanslag tillåts som avskiljare.
+          Övningen kontrollerar bara format, inte kontrollsiffra eller mottagare.
+        &lt;/p&gt;
+        &lt;input
+          ref={inputRef}
+          id={`${id}-ocr`}
+          name=&quot;ocr&quot;
+          type=&quot;text&quot;
+          inputMode=&quot;numeric&quot;
+          value={ocr}
+          onChange={change}
+          aria-describedby={`${id}-help ${id}-error`}
+          aria-invalid={error ? true : undefined}
+        /&gt;
+        &lt;p id={`${id}-error`}&gt;{error}&lt;/p&gt;
+        &lt;button type=&quot;submit&quot;&gt;Kontrollera format&lt;/button&gt;
+        &lt;button
+          type=&quot;button&quot;
+          aria-label=&quot;Kopiera OCR-nummer&quot;
+          aria-disabled={copying || undefined}
+          onClick={copy}
+        &gt;
+          &lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; width=&quot;24&quot; height=&quot;24&quot;
+            viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; strokeWidth=&quot;2&quot;&gt;
+            &lt;rect x=&quot;8&quot; y=&quot;8&quot; width=&quot;12&quot; height=&quot;13&quot; rx=&quot;2&quot; /&gt;
+            &lt;path d=&quot;M15 8V3H3v13h5&quot; /&gt;
+          &lt;/svg&gt;
+        &lt;/button&gt;
+      &lt;/form&gt;
+      &lt;p role=&quot;status&quot;&gt;{status}&lt;/p&gt;
+    &lt;/section&gt;
+  );
+}
+</code></pre></details></section><section id="konto"><h2>Kontonummer och IBAN</h2><p><strong>Krav:</strong> Nummer ska bevara inledande nollor och IBAN även bokstäver.</p>
 <h3>Prova själv</h3><div class="demo"><p>Kontonummer i övningen: <span class="number">0012 3456 7890</span></p><label for="iban">IBAN i övningen</label><p id="iban-help">Formatövning utan kontroll av giltighet. Bevara bokstäver och inledande nollor.</p><input id="iban" name="iban" type="text" value="SE00 0000 0000 0000 0000 0000" aria-describedby="iban-help" autocapitalize="characters" spellcheck="false"></div>
 <p><strong>Gör så här:</strong> Granska hela kontonumret och IBAN-fältet. Redigera och kopiera. IBAN-exemplet är avsiktligt ett ogiltigt övningsvärde och ska inte användas för en betalning.</p><p><strong>Förväntat resultat:</strong> Bokstäver, nollor och samtliga grupper finns kvar i rätt ordning. Fältet tillåter bokstäver och har därför inte ett tangentbord begränsat till siffror.</p>
 <details><summary>HTML och implementation för kontonummer och iban</summary><pre><code>&lt;p&gt;Kontonummer: 0012 3456 7890&lt;/p&gt;

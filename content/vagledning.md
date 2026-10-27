@@ -74,3 +74,10 @@ Skapa regionen innan texten uppdateras. Lägg inte hela gränssnittet i en live-
 Ange svenska som sidans språk med lang="sv". Håll belopp, valuta och sammanhang begripliga. Kontrollera radbrytning, förstoring och kopiering i de faktiska komponenterna. Långa nummer får inte kapas. Visa vad maskering betyder, exempelvis ”Kort som slutar på 5963”, och lägg inte maskerade siffror i dold text.
 
 [Primärkällorna](kallor.html) ger stöd för HTML, React, tillgängliga namn och statusmeddelanden.
+
+## Kompletta React-exempel
+
+- [OCR med validering och kopiering](testfall/identifierare.html#ocr-react). Sträng i state, hjälptext, felhantering och tillgänglig återkoppling.
+- [Belopp med gemensamt state](testfall/sammanhang.html#betalning-react). Konto, belopp och valuta styr sammanställning och knapptext.
+
+Exemplen är utfällbara på övningssidorna och går att hämta som JSX-filer. De är kompletta komponenter för ett befintligt React-projekt, inte en färdig bankintegration. Anpassa dem till tjänstens regler och prova dem med skärmläsare.
