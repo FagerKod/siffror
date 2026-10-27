@@ -3,151 +3,62 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Siffror och tal med skärmläsare · Siffror</title>
+<title>För utvecklare · Siffror</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <a class="skip" href="#main">Hoppa till innehållet</a>
-<header><a class="brand" href="index.html">Siffror</a><p>Vägledning och testunderlag</p>
+<header><a class="brand" href="index.html">Siffror</a><p>Lär dig och prova med skärmläsare</p>
 <nav aria-label="Huvudmeny"><ul>
-<li><a href="vagledning.html">Vägledning</a></li>
-<li><a href="testfall.html">Testfall</a></li>
-<li><a href="testmanual.html">Testmanual</a></li>
-<li><a href="resultat.html">Resultat</a></li>
-</ul></nav></header>
-<main id="main" tabindex="-1"><h1 id="siffror-och-tal-med-skarmlasare">Siffror och tal med skärmläsare</h1>
-<p>Gemensam vägledning för testare och utvecklare. Version 3, 22 oktober 2026.</p>
-<p><strong>Visa siffror och tal som vanlig, läsbar text. Låt samma text vara tillgänglig för hjälpmedel. Skapa inte alternativa uttal med <code>aria-label</code>, dolda dubbletter eller utskrivna sifferord.</strong></p>
-<p>Skärmläsare behöver inte läsa ett värde med samma ord, pauser eller gruppering. Det viktiga är att användaren får rätt information: hela värdet eller sifferföljden, dess betydelse och det sammanhang som behövs. När exakta siffror behövs ska de också gå att kontrollera.</p>
-<p>Vägledningen gäller svenska webbgränssnitt. Den beskriver vår rekommenderade arbetspraxis. Standardkrav är särskilt utpekade och källbelagda. Tidigare testobservationer finns separat under <a href="resultat.html">Resultat</a>; de är inte garantier för andra miljöer.</p>
-<nav class="toc" aria-label="På sidan"><strong>På sidan</strong><ul><li><a href="#gemensam-grundprincip">Gemensam grundprincip</a></li><li><a href="#for-testare">För testare</a></li><li><a href="#for-utvecklare">För utvecklare</a></li><li><a href="#nar-ar-arbetet-klart">När är arbetet klart</a></li></ul></nav>
-<h2 id="gemensam-grundprincip">Gemensam grundprincip</h2>
-<h3 id="vad-betyder-att-allt-ska-bli-upplast">Vad betyder att allt ska bli uppläst</h3>
-<p>Ett saldo på <code>1 234,50 kr</code> får läsas som ett sammanhängande belopp. Siffrorna behöver inte uttalas en i taget. Ett telefonnummer får läsas siffervis eller gruppvis, så länge hela numret går att uppfatta och verifiera, inklusive den inledande nollan.</p>
-<p>Det är informationen som ska komma fram. Ett mellanrum behöver inte sägas som ”mellanslag”. Ett kommatecken kan förmedlas genom ett begripligt decimaluttryck. Däremot får <code>−134,50 kr</code> inte uppfattas som ett positivt saldo, och en maskerad kortuppgift får inte uppfattas som ett fullständigt kortnummer.</p>
-<p>När användaren behöver den exakta representationen, exempelvis ett OCR-nummer eller alla visade decimaler, räcker det inte att siffrorna finns någonstans i koden. Kontrollera att de faktiskt går att läsa och verifiera med hjälpmedlet.</p>
-<h3 id="vad-vi-styr-och-vad-anvandaren-styr">Vad vi styr och vad användaren styr</h3>
-<p>Vi styr innehåll, textordning, språkangivelse, HTML-struktur, namngivning av kontroller och om information döljs för hjälpmedel. Skärmläsare, webbläsare, talsyntes, röst och inställningar påverkar hur informationen presenteras. Skiljeteckennivån kan exempelvis påverka vilka symboler som sägs. <a href="kallor.html#k1">K1</a> <a href="kallor.html#k2">K2</a></p>
-<p>Vi ska inte bygga en egen uttalsversion för varje röst. Vi ska heller inte avfärda ett användningsproblem bara för att HTML-koden ser korrekt ut. Börja med tydligare synligt innehåll och rätt struktur när information är svår att förstå.</p>
-<h2 id="for-testare">För testare</h2>
-<h3 id="vad-ska-ga-att-uppfatta">Vad ska gå att uppfatta</h3>
-<p>Tabellen beskriver vad som ska gå att kontrollera. Exemplen är inga manus för exakt uppläsning.</p>
-<div class="table-scroll" role="region" tabindex="0" aria-label="Tabell: Vad ska gå att uppfatta"><table><thead><tr>
-<th scope="col">Typ av information</th>
-<th scope="col">Exempel</th>
-<th scope="col">Kontrollera detta</th>
-</tr></thead><tbody>
-<tr><td>Belopp och saldo</td><td><code>1 234,50 kr</code></td><td>Rätt storlek, decimalvärde, valuta och vilket saldo eller belopp det gäller. ”Femtio öre” kan förmedla decimaldelen utan att siffrorna sägs separat.</td></tr>
-<tr><td>Negativa värden</td><td><code>−134,50 kr</code></td><td>Det framgår att värdet är negativt. Färg ensam får inte bära betydelsen.</td></tr>
-<tr><td>Antal</td><td><code>1 234 deltagare</code></td><td>Rätt antal och vad som räknas. Annan gruppering i talet är inte i sig ett fel.</td></tr>
-<tr><td>Decimaler och precision</td><td><code>0,3120 euro</code></td><td>Rätt decimalvärde. Alla visade decimaler, inklusive slutnollan, går att kontrollera om precisionen behöver verifieras.</td></tr>
-<tr><td>Telefonnummer</td><td><code>070 123 45 67</code></td><td>Hela sifferföljden i rätt ordning, inklusive inledande nolla. Kontrollera även landsnummer när det visas.</td></tr>
-<tr><td>OCR och kontonummer</td><td><code>1234 5678 9012 3456</code></td><td>Varje siffra går att verifiera. Kontrollera kopiering separat om uppgiften ska användas vidare.</td></tr>
-<tr><td>Personnummer och andra identifierare</td><td><code>19770311-0376</code></td><td>Hela identifieraren kan kontrolleras. Skilj på formatavskiljare och tecken som faktiskt skiljer två identifierare åt.</td></tr>
-<tr><td>Maskerade nummer</td><td><code>Kort som slutar på 5963</code></td><td>De synliga siffrorna och att resten inte visas framgår. Dolda siffror ska inte avslöjas för hjälpmedel.</td></tr>
-<tr><td>Procent och mått</td><td><code>12,5 %</code>, <code>45 m²</code></td><td>Talet och enhetens betydelse framgår. Kvadratmeter får inte bli meter.</td></tr>
-<tr><td>Årtal och versioner</td><td><code>1995</code>, <code>2.1.4</code></td><td>Rätt år eller versionsbeteckning kan identifieras. Kräv inte ett bestämt sätt att säga årtalet.</td></tr>
-</tbody></table></div>
-<p><code>0,312</code> och <code>0,3120</code> har samma matematiska värde, men den skrivna precisionen kan vara viktig. Bedöm både värdet och möjligheten att granska representationen när uppgiften kräver det.</p>
-<h3 id="sa-bedomer-du-ett-resultat">Så bedömer du ett resultat</h3>
-<ol>
-<li>Läs innehållet i sitt sammanhang med skärmläsarens vanliga läsning. Kontrollera värde, tecken, enhet och vilken uppgift siffrorna hör till.</li>
-<li>Navigera direkt till innehållet. För länkar, knappar och fält kontrollerar du även vad som hörs när de får fokus. Vanlig statisk text behöver inte vara nåbar med Tab.</li>
-<li>Om exakta siffror är otydliga, använd ord- eller teckennavigering. Kontrollera hela följden, inte bara början och slutet. Notera om detta krävs för att lösa uppgiften och hur väl det fungerar.</li>
-<li>Vid en avvikelse: spara miljö, textunderlag, det faktiskt hörda talet och navigeringssättet. Jämför sedan relevanta inställningar och andra stödda miljöer.</li>
-</ol>
-<div class="table-scroll" role="region" tabindex="0" aria-label="Tabell: Så bedömer du ett resultat"><table><thead><tr>
-<th scope="col">Utfall</th>
-<th scope="col">Bedömning och nästa steg</th>
-</tr></thead><tbody>
-<tr><td>Olika uttal, samma begripliga information</td><td>Godtagbart för denna kontroll. Ingen ändring behövs enbart för att få likadant uttal.</td></tr>
-<tr><td>Exakt följd går att kontrollera, men arbetet är omständligt</td><td>Dokumentera användbarheten. Teckennavigering är ett möjligt arbetssätt, inte ett automatiskt frikort. Bedöm det mot användarens uppgift.</td></tr>
-<tr><td>En siffra, ett tecken eller ett sammanhang saknas eller blir fel</td><td>Registrera en avvikelse och utred orsaken. Godkänn inte med hänvisning enbart till att originaltexten finns i DOM.</td></tr>
-<tr><td>Underlaget är ofullständigt eller utfallet går inte att reproducera</td><td>Markera ”Ej bedömt” eller ”Behöver utredas”. Gissa inte ett godkänt resultat.</td></tr>
-</tbody></table></div>
-<p>För ett vanligt saldo bör värde och valuta vara begripliga vid normal läsning. För en lång identifierare kan mer detaljerad granskning behövas. Detta är vår bedömningsprincip, inte en regel i WCAG om ett visst antal tangenttryckningar.</p>
-<h3 id="vad-ar-ett-wcag-fel">Vad är ett WCAG-fel</h3>
-<p>Ett annorlunda uttal visar inte i sig att ett WCAG-kriterium är brutet. Ett problem behöver kopplas till vad som faktiskt saknas eller är fel. WCAG anger inte ett gemensamt uppläsningsmanus för tal. Tekniken måste samtidigt ha tillgänglighetsstöd i de miljöer som lösningen förlitar sig på. <a href="kallor.html#k3">K3</a></p>
-<div class="table-scroll" role="region" tabindex="0" aria-label="Tabell: Vad är ett WCAG-fel"><table><thead><tr>
-<th scope="col">Kriterium</th>
-<th scope="col">Exempel på vad du undersöker</th>
-</tr></thead><tbody>
-<tr><td>1.3.1 Information och relationer</td><td>Kan belopp kopplas till rätt konto, tabellrubrik eller fältetikett? <a href="kallor.html#k4">K4</a></td></tr>
-<tr><td>1.3.2 Meningsfull ordning</td><td>Är textens och strukturens läsordning korrekt när ordningen påverkar betydelsen? <a href="kallor.html#k5">K5</a></td></tr>
-<tr><td>1.4.1 Användning av färg</td><td>Visas negativt eller positivt värde på annat sätt än enbart med färg? <a href="kallor.html#k6">K6</a></td></tr>
-<tr><td>2.5.3 Etikett i namn</td><td>Ingår en knapps eller länks synliga textetikett i dess tillgängliga namn? Kravet gäller inte all statisk text. <a href="kallor.html#k7">K7</a></td></tr>
-<tr><td>3.1.1 och 3.1.2 Språk</td><td>Är sidans språk och relevanta språkbyten angivna? <a href="kallor.html#k8">K8</a> <a href="kallor.html#k9">K9</a></td></tr>
-<tr><td>3.3.2 och 4.1.2 Formulär och kontroller</td><td>Finns begripliga etiketter och instruktioner, samt korrekt namn, roll och värde? <a href="kallor.html#k3">K3</a></td></tr>
-<tr><td>4.1.3 Statusmeddelanden</td><td>Kan hjälpmedel presentera en relevant statusuppdatering utan att flytta fokus? <a href="kallor.html#k10">K10</a></td></tr>
-</tbody></table></div>
-<p>Om en talsyntes flyttar ett valutaord i talet är det inte automatiskt ett fel i sidans läsordning enligt 1.3.2. Undersök både kod, exponering och användarens upplevelse innan du anger orsak och kriterium.</p>
-<p>För konkreta kommandon och dokumentation av en körning, se <a href="testmanual.html">Testmanual</a>.</p>
-<h2 id="for-utvecklare">För utvecklare</h2>
-<h3 id="borja-med-vanlig-text-och-tydligt-sammanhang">Börja med vanlig text och tydligt sammanhang</h3>
-<pre tabindex="0" aria-label="Kodexempel"><code>&lt;html lang=&quot;sv&quot;&gt;
-&lt;!-- Sidans övriga struktur utelämnad i exemplet. --&gt;
-&lt;p&gt;Sparkonto 3835789, saldo 1&amp;#160;234,50 kr&lt;/p&gt;
-&lt;p&gt;Kort som slutar på 5963&lt;/p&gt;
-&lt;a href=&quot;tel:+46701234567&quot;&gt;070 123 45 67&lt;/a&gt;
-&lt;button type=&quot;button&quot;&gt;Betala 1&amp;#160;234,50 kr&lt;/button&gt;</code></pre>
-<p>Exemplen visar markupmönster. Lägg knappens faktiska funktion i applikationen. Använd tabellrubriker när uppgifterna presenteras i en datatabell, och synliga, kopplade etiketter för inmatningsfält.</p>
-<p><code>lang=&quot;sv&quot;</code> ger hjälpmedlet möjlighet att välja svenska uttalsregler. Det garanterar inte en viss röst eller uppläsning. Märk upp verkliga språkbyten; byt inte språk på ett tal för att få ett önskat uttal. Undantagen i 3.1.2 omfattar bland annat egennamn och tekniska termer. <a href="kallor.html#k8">K8</a> <a href="kallor.html#k9">K9</a></p>
-<h3 id="formatera-efter-betydelse">Formatera efter betydelse</h3>
-<div class="table-scroll" role="region" tabindex="0" aria-label="Tabell: Formatera efter betydelse"><table><thead><tr>
-<th scope="col">Information</th>
-<th scope="col">Rekommenderad implementation</th>
-</tr></thead><tbody>
-<tr><td>Belopp och antal</td><td>Använd en gemensam formatterad text med avsedd gruppering, decimaler och enhet.</td></tr>
-<tr><td>Telefon, OCR och konto</td><td>Bevara som strängar. Välj gruppering som passar respektive identifierare och användningssätt; fyrgrupper är ingen universell regel.</td></tr>
-<tr><td>Personnummer</td><td>Bevara den avsedda identifieraren och tecknen enligt systemets formatregler. Byt inte bindestreck till andra tecken enbart för uttalets skull.</td></tr>
-<tr><td>Årtal, version och husnummer</td><td>Använd inte generell tusentalsgruppering.</td></tr>
-<tr><td>Maskering</td><td>Förklara synligt vad som visas, exempelvis ”Kort som slutar på 5963”. Exponera aldrig de maskerade siffrorna i en dold text.</td></tr>
-</tbody></table></div>
-<p>Vanligt mellanslag U+0020, hårt mellanslag U+00A0 och smalt hårt mellanslag U+202F ska inte antas ge identisk uppläsning överallt. Välj utifrån läsbarhet, radbrytning och kopiering, och testa den faktiska utdata som komponenten ger.</p>
-<p>Hårda mellanslag kan hålla ihop delar av ett värde, men långa obrutna strängar får inte leda till att innehåll klipps bort eller hindrar reflow. Kontrollera små vyer och förstoring. <a href="kallor.html#k11">K11</a></p>
-<p><code>Intl.NumberFormat</code> kan användas för lokalanpassad presentation. Ange avsedd precision: formatinställningar kan avrunda och ändra antalet visade decimaler. Återanvänd resultatet som text i gränssnittet, inte som en separat skärmläsarversion. <a href="kallor.html#k12">K12</a></p>
-<pre tabindex="0" aria-label="Kodexempel"><code>const formatSEK = new Intl.NumberFormat(&quot;sv-SE&quot;, {
-  style: &quot;currency&quot;,
-  currency: &quot;SEK&quot;,
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2
-});
+<li><a href="vagledning.html">För utvecklare</a></li>
+<li><a href="testfall.html">Exempel</a></li>
+<li><a href="testmanual.html">Prova med skärmläsare</a></li>
 
-saldoElement.textContent = formatSEK.format(1234.5);</code></pre>
-<p>Exemplet förutsätter att <code>saldoElement</code> är ett befintligt element och att två decimaler är rätt för uppgiften. Det är en presentationsfunktion, inte en lösning för exakta finansiella beräkningar. Skicka inte OCR-nummer eller andra identifierare genom talformatteraren.</p>
-<h3 id="anvand-inte-aria-for-att-regissera-uttalet">Använd inte ARIA för att regissera uttalet</h3>
-<p>På vanliga <code>span</code>, <code>div</code> och <code>p</code> förbjuder de implicita rollerna namngivning med <code>aria-label</code> och <code>aria-labelledby</code>. Att en viss kombination ändå läser etiketten gör inte koden korrekt. Lägg inte till en roll enbart för att kringgå detta. <a href="kallor.html#k13">K13</a></p>
-<p>På en knapp eller länk kan <code>aria-label</code> vara tillåtet, men ska inte användas som ett uttalsmanus. Den synliga textetiketten ska ingå i det tillgängliga namnet. Behåll därför normalt knappens eller länkens text som namn. Detta är inget generellt förbud mot ARIA; exempelvis kan <code>aria-describedby</code> koppla en hjälpinstruktion till ett fält. <a href="kallor.html#k7">K7</a></p>
-<p>Skapa inte en synlig sträng och en dold, siffervis eller normaliserad dubblett som standardlösning. En sådan konstruktion ger två representationer att hålla synkroniserade och behöver särskild kontroll av kopiering, sökning, tal och punktskrift.</p>
-<h3 id="css-och-betydelsebarande-tecken">CSS och betydelsebärande tecken</h3>
-<p>Lägg tal, enheter och betydelsebärande tecken i HTML-texten. CSS-avstånd som <code>letter-spacing</code> skapar inte nya tecken i textnoden. Däremot är påståendet att CSS-genererat innehåll aldrig når skärmläsare fel: stödet har förbättrats och det gamla WCAG-felexemplet F87 är indraget. Vår rekommendation är ändå att hålla uppgiften som vanlig text, bland annat för granskning och kopiering. <a href="kallor.html#k14">K14</a></p>
-<p>Förväxla inte bindestreck med matematiskt minus. U+002D kan ha båda funktionerna; U+2212 är uttryckligen ett minustecken. U+2212 är därför inte ett otillåtet ”uttalsknep”. Välj ett semantiskt lämpligt tecken och testa uppläsning och datautbyte. Ingen av kodpunkterna garanterar ett visst uttal. <a href="kallor.html#k15">K15</a></p>
-<p>Om ett negativt saldo är svårt att uppfatta, kan ett synligt förtydligande som ”Negativt saldo” hjälpa alla. Använd bara formuleringar som stämmer med verksamhetens betydelse; negativt saldo och skuld är inte alltid utbytbara begrepp.</p>
-<h3 id="inmatning-och-kopiering">Inmatning och kopiering</h3>
-<p>Använd normalt <code>type=&quot;text&quot;</code> för sifferidentifierare och <code>type=&quot;tel&quot;</code> för telefoninmatning. <code>type=&quot;number&quot;</code> är avsett för numeriska värden, inte varje sträng som består av siffror. <code>inputmode</code> ger en tangentbordshint, inte validering. <a href="kallor.html#k16">K16</a> <a href="kallor.html#k17">K17</a></p>
+</ul></nav></header>
+<main id="main" tabindex="-1"><h1 id="for-utvecklare">För utvecklare</h1>
+<p>Utgå från vanlig text och tydlig HTML. Synlig information och information för hjälpmedel ska stämma överens. Undvik separata uttalsversioner av synliga tal.</p>
+<nav class="toc" aria-label="På sidan"><strong>På sidan</strong><ul><li><a href="#belopp-och-precision">Belopp och precision</a></li><li><a href="#nummer-ar-strangar">Nummer är strängar</a></li><li><a href="#kontrollerade-falt-i-react">Kontrollerade fält i React</a></li><li><a href="#ikonknappar-behover-namn">Ikonknappar behöver namn</a></li><li><a href="#sammanhang-och-uppdateringar">Sammanhang och uppdateringar</a></li><li><a href="#lasbarhet-och-kontroll">Läsbarhet och kontroll</a></li></ul></nav>
+<h2 id="belopp-och-precision">Belopp och precision</h2>
+<p>Använd samma formatterade text i gränssnittets berörda delar. Bestäm precision per uppgift. Två decimaler passar inte alla värden. Bevara tecken och enhet i texten; färg ensam räcker inte för minus.</p>
+<pre tabindex="0" aria-label="Kodexempel"><code>&lt;p&gt;Lönekonto, saldo 1 234,50 kr&lt;/p&gt;
+&lt;p&gt;Saldo −134,50 kr (negativt saldo)&lt;/p&gt;
+&lt;button type=&quot;button&quot;&gt;Betala 1 234,50 kr&lt;/button&gt;</code></pre>
+<p>Knappens text är dess tillgängliga namn. Ingen separat uttalsversion behövs. <a href="testfall/index.html">Prova belopp och saldo</a>.</p>
+<p>Intl.NumberFormat kan formatera presentationen. Ange valuta och avsedd precision. En sådan formatterare ersätter inte exakta beloppsberäkningar. I betalningsövningen bevaras inmatningen som text och beloppet hanteras som ett helt antal hundradelar.</p>
+<h2 id="nummer-ar-strangar">Nummer är strängar</h2>
+<p>OCR-nummer, kontonummer, telefonnummer och IBAN är inte tal som ska räknas med. Bevara inledande nollor och bokstäver. Normalisera endast avskiljare som formatreglerna tillåter.</p>
 <pre tabindex="0" aria-label="Kodexempel"><code>&lt;label for=&quot;ocr&quot;&gt;OCR-nummer&lt;/label&gt;
-&lt;p id=&quot;ocr-hjalp&quot;&gt;Du kan klistra in numret med mellanslag.&lt;/p&gt;
-&lt;input id=&quot;ocr&quot; name=&quot;ocr&quot; type=&quot;text&quot;
-       inputmode=&quot;numeric&quot; aria-describedby=&quot;ocr-hjalp&quot;&gt;</code></pre>
-<p>Hjälptexten i exemplet förutsätter att applikationen verkligen accepterar mellanslag. Implementera normalisering och validering även på serversidan. Ta bara bort avskiljare som formatet tillåter; använd inte en generell funktion som raderar alla icke-siffror. Bevara inledande nollor och betydelsebärande tecken.</p>
-<p>Vår standard är att inte lägga in grupperingsmellanslag vid varje tangenttryckning. Om automatisk formatering behövs, kontrollera redigering mitt i värdet, markörposition, inklistring, felmeddelanden och skärmläsarens återkoppling.</p>
-<p>En kopieringsknapp kan kopiera ett korrekt råvärde. Det är en extra hjälp, inte en ersättning för läsbar text. Kontrollera också vanlig markering och kopiering. Meddela resultatet av kopieringen tillgängligt, och visa inte ”Kopierat” om kopieringen misslyckas.</p>
-<h3 id="uppdateringar-och-undantag">Uppdateringar och undantag</h3>
-<p>Ett belopp som ändras behöver inte alltid annonseras automatiskt. När ändringen är ett statusmeddelande, exempelvis resultatet av en beräkning, behöver det kunna förmedlas utan att fokus flyttas. En synlig statusregion kan användas för detta. <code>aria-live</code> styr annonsering av ändringar, inte uttalet av siffror. <a href="kallor.html#k10">K10</a></p>
-<p>Tekniska undantag kräver ett dokumenterat problem och prövas först när tydligare synlig text och struktur inte räcker. Om synligt innehåll döljs med <code>aria-hidden=&quot;true&quot;</code> måste likvärdig information och funktion fortfarande nå hjälpmedel. Dölj inte fokuserbara kontroller eller deras föräldrar. <a href="kallor.html#k18">K18</a></p>
-<p>Ett undantag ska beskriva problemet, varför en innehållslösning inte räcker, den exakta alternativa representationen och testade miljöer. Kontrollera synlig text, tillgängligt namn, teckennavigering, kopiering och relevanta punktskriftsflöden. Ett lyckat test av dubbletttekniken för ett belopp bevisar inte att den passar alla identifierare eller kontroller.</p>
-<h2 id="nar-ar-arbetet-klart">När är arbetet klart</h2>
-<p>Testare och utvecklare ska kunna svara ja på följande i de överenskomna testmiljöerna:</p>
-<ul>
-<li>Samma korrekta uppgift visas och exponeras för hjälpmedel, utan en särskild uttalsversion.</li>
-<li>Hela värdet eller identifieraren och nödvändigt sammanhang går att uppfatta och kontrollera.</li>
-<li>Negativt tecken, decimaler, valuta, enhet och eventuell maskering förmedlas när de behövs.</li>
-<li>Länkar, knappar, tabeller och fält fungerar i sina respektive användningssätt.</li>
-<li>Skillnader i uttal har skilts från informationsförlust och praktiska användningsproblem.</li>
-<li>Resultatet är dokumenterat med miljö och inställningar. Kvarstående avvikelser är uttryckliga.</li>
-</ul>
-<p>Se <a href="testfall.html">Testfall</a>, <a href="testmanual.html">Testmanual</a>, <a href="resultat.html">Resultat</a> och <a href="kallor.html">Källor och faktakontroll</a>.</p></main>
-<footer><p>Version 3 · 22 oktober 2026 · <a href="kallor.html">Källor och faktakontroll</a></p>
+&lt;input id=&quot;ocr&quot; name=&quot;ocr&quot; type=&quot;text&quot; inputmode=&quot;numeric&quot;&gt;</code></pre>
+<p>inputmode ger en tangentbordshint, inte validering. IBAN behöver även bokstäver. Validera enligt tjänstens regler också på servern. <a href="testfall/identifierare.html#ocr-exempel">Prova redigering och kopiering</a>.</p>
+<h2 id="kontrollerade-falt-i-react">Kontrollerade fält i React</h2>
+<p>Behåll den inmatade strängen i state och uppdatera den i onChange. Använd htmlFor och inputMode i JSX.</p>
+<pre tabindex="0" aria-label="Kodexempel"><code>const [ocr, setOcr] = useState(&#x27;&#x27;);
+
+&lt;label htmlFor=&quot;ocr&quot;&gt;OCR-nummer&lt;/label&gt;
+&lt;input
+  id=&quot;ocr&quot;
+  name=&quot;ocr&quot;
+  type=&quot;text&quot;
+  inputMode=&quot;numeric&quot;
+  value={ocr}
+  onChange={event =&gt; setOcr(event.target.value)}
+/&gt;</code></pre>
+<p>Utdraget hör hemma i en React-komponent med useState importerad. Undvik omformatering som flyttar markören medan användaren skriver. Normalisera vid ett tydligt steg och kontrollera redigering, inklistring och tomt värde. Webbplatsens körbara exempel använder HTML och JavaScript; samma HTML-semantik gäller i React.</p>
+<h2 id="ikonknappar-behover-namn">Ikonknappar behöver namn</h2>
+<p>Ett tillgängligt namn kan beskriva en kontrolls funktion utan att skapa en annan uttalsversion av ett synligt tal.</p>
+<pre tabindex="0" aria-label="Kodexempel"><code>&lt;button type=&quot;button&quot; aria-label=&quot;Kopiera OCR-nummer&quot;&gt;
+  &lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot;&gt;...&lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+<p>Lägg till fungerande kopiering och synlig återkoppling i en statusregion. Visa inte att kopieringen lyckades om den misslyckades. <a href="testfall/identifierare.html#ocr-exempel">Prova ikonknappen</a>.</p>
+<h2 id="sammanhang-och-uppdateringar">Sammanhang och uppdateringar</h2>
+<p>Koppla etiketter till fält och använd rubriker i tabeller. Härled sammanställning och knapptext från samma aktuella data. När en åtgärd behöver bekräftas kan en synlig statusregion ge återkoppling utan fokusflytt.</p>
+<pre tabindex="0" aria-label="Kodexempel"><code>&lt;p role=&quot;status&quot;&gt;&lt;/p&gt;</code></pre>
+<p>Skapa regionen innan texten uppdateras. Lägg inte hela gränssnittet i en live-region. En ändring behöver inte alltid annonseras automatiskt. <a href="testfall/sammanhang.html">Prova betalningsövningen</a>.</p>
+<h2 id="lasbarhet-och-kontroll">Läsbarhet och kontroll</h2>
+<p>Ange svenska som sidans språk med lang=&quot;sv&quot;. Håll belopp, valuta och sammanhang begripliga. Kontrollera radbrytning, förstoring och kopiering i de faktiska komponenterna. Långa nummer får inte kapas. Visa vad maskering betyder, exempelvis ”Kort som slutar på 5963”, och lägg inte maskerade siffror i dold text.</p>
+<p><a href="kallor.html">Primärkällorna</a> ger stöd för HTML, React, tillgängliga namn och statusmeddelanden.</p></main>
+<footer><p>Version 4 · 27 oktober 2026 · <a href="kallor.html">Källor</a></p>
 <p><a href="https://github.com/FagerKod/siffror/blob/main/content/vagledning.md">Dokumentets källfil på GitHub</a></p></footer>
 </body>
 </html>
+

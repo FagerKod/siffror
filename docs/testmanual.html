@@ -3,79 +3,53 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Testmanual för siffror och tal · Siffror</title>
+<title>Prova med skärmläsare · Siffror</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <a class="skip" href="#main">Hoppa till innehållet</a>
-<header><a class="brand" href="index.html">Siffror</a><p>Vägledning och testunderlag</p>
+<header><a class="brand" href="index.html">Siffror</a><p>Lär dig och prova med skärmläsare</p>
 <nav aria-label="Huvudmeny"><ul>
-<li><a href="vagledning.html">Vägledning</a></li>
-<li><a href="testfall.html">Testfall</a></li>
-<li><a href="testmanual.html">Testmanual</a></li>
-<li><a href="resultat.html">Resultat</a></li>
+<li><a href="vagledning.html">För utvecklare</a></li>
+<li><a href="testfall.html">Exempel</a></li>
+<li><a href="testmanual.html">Prova med skärmläsare</a></li>
+
 </ul></nav></header>
-<main id="main" tabindex="-1"><h1 id="testmanual-for-siffror-och-tal">Testmanual för siffror och tal</h1>
-<p>Version 3, 22 oktober 2026. Använd <a href="vagledning.html#for-testare">vägledningen för testare</a> för bedömningen. Här finns arbetsgången och kommandon för att undersöka uppläsningen.</p>
-<nav class="toc" aria-label="På sidan"><strong>På sidan</strong><ul><li><a href="#forbered-en-korning">Förbered en körning</a></li><li><a href="#hall-isar-tre-sorters-underlag">Håll isär tre sorters underlag</a></li><li><a href="#kor-varje-testfall">Kör varje testfall</a></li><li><a href="#nvda-pa-windows">NVDA på Windows</a></li><li><a href="#voiceover-pa-macos">VoiceOver på macOS</a></li><li><a href="#voiceover-pa-iphone-och-ipad">VoiceOver på iPhone och iPad</a></li><li><a href="#talkback-pa-android">TalkBack på Android</a></li><li><a href="#dokumentera-och-bedom">Dokumentera och bedöm</a></li></ul></nav>
-<h2 id="forbered-en-korning">Förbered en körning</h2>
-<p>Anteckna datum, testsidans version eller commit, testare, operativsystem, webbläsare, skärmläsare, talsyntes, röst, språk, tangentbordslayout och relevanta inställningar. Ange versioner för programmen samt skiljeteckennivå och eventuella egna uttalsregler.</p>
-<p>Bestäm testmiljöerna utifrån tjänstens användare och support. Tidigare observationer omfattar NVDA på Windows och VoiceOver på macOS men saknar fullständig miljöinformation. Planera nya dokumenterade körningar; gamla resultat ersätter inte verifiering i den miljö som nu ska stödjas. Mobil och punktskrift behöver egna körningar om slutsatserna ska omfatta dem.</p>
-<h2 id="hall-isar-tre-sorters-underlag">Håll isär tre sorters underlag</h2>
-<ul>
-<li><strong>Källtext:</strong> vad sidan innehåller och exponerar, inklusive exakta siffror och tecken.</li>
-<li><strong>Talvisare eller textpanel:</strong> den text som hjälpmedlet visar som stöd för talet. Spara den utan omskrivning.</li>
-<li><strong>Hört tal:</strong> vad rösten faktiskt uttalar. Anteckna det separat; vid svårtolkade resultat kan en inspelning av testmaterialet behövas.</li>
-</ul>
-<p>En textpanel är inte en ljudinspelning. Dra inte slutsatsen att en talsyntes uttalade alla siffror korrekt enbart från paneltexten. Om det hörda talet och paneltexten skiljer sig, bevara båda uppgifterna.</p>
-<p>NVDA:s talvisare finns under Verktyg i NVDA-menyn. VoiceOvers textpanel finns i VoiceOver-verktyg, Visuellt, Paneler och menyer. Öppna verktyget med <code>VO+Fn+F8</code>; Fn kan bero på tangentbordsinställning. <a href="kallor.html#k1">K1</a> <a href="kallor.html#k19">K19</a></p>
-<h2 id="kor-varje-testfall">Kör varje testfall</h2>
-<ol>
-<li>Låt de tekniska detaljerna vara stängda. Läs sidan med vanlig löpande läsning och dokumentera utfallet.</li>
-<li>Navigera till testfallet via rubriken och vidare till teststrängen. Dokumentera detta separat.</li>
-<li>För länk och knapp: kontrollera även vid tangentbordsfokus och relevant länk- eller knapplista. Aktivera inte testtelefonlänken. Testknappen genomför ingen betalning.</li>
-<li>För tabellen: läs först normalt, sedan med hjälpmedlets tabellnavigering. Kontrollera kopplingen till rubriken.</li>
-<li>Kontrollera exakta sifferföljder med tecken- eller ordgranskning. Skriv ner följden medan du granskar; detta är inget minnestest.</li>
-<li>Öppna tekniska detaljer efteråt och jämför med källtexten. Klassificera enligt vägledningen och notera kvarstående osäkerhet.</li>
-</ol>
-<p>Testa i första hand tc-04, tc-05, tc-10 och tc-11 med detaljerad granskning. Lägg till tc-09 för slutnollan och tc-12/tc-13 för negativa värden. Kontrollera sedan återstående fall och de verkliga komponenterna i tjänsten.</p>
+<main id="main" tabindex="-1"><h1 id="prova-med-skarmlasare">Prova med skärmläsare</h1>
+<p>Använd NVDA med en stödd webbläsare på Windows eller VoiceOver med Safari på iPhone. Välj svensk röst och anteckna versioner och inställningar om du dokumenterar ett resultat. Kommandona nedan avser standardinställningar.</p>
+<nav class="toc" aria-label="På sidan"><strong>På sidan</strong><ul><li><a href="#nvda-pa-windows">NVDA på Windows</a></li><li><a href="#voiceover-pa-iphone">VoiceOver på iPhone</a></li><li><a href="#vad-raknas-som-ett-bra-resultat">Vad räknas som ett bra resultat</a></li><li><a href="#dokumentera-vid-behov">Dokumentera vid behov</a></li><li><a href="#kommandon-och-produktmanualer">Kommandon och produktmanualer</a></li></ul></nav>
 <h2 id="nvda-pa-windows">NVDA på Windows</h2>
-<p>I bläddringsläge används <code>H</code> för nästa rubrik och vänster/höger pil för textens tecken. <code>NVDA+Mellanslag</code> växlar bläddrings- och fokusläge. Fokusläge är inte ett extra testläge för vanliga statiska stycken.</p>
-<p>För granskningsmarkören gäller följande standardkommandon. Numpad används med Num Lock av.</p>
+<p>Starta NVDA och öppna ett av <a href="testfall.html">exemplen</a>. NVDA-tangenten är vanligtvis Insert eller Caps Lock beroende på inställning.</p>
 <div class="table-scroll" role="region" tabindex="0" aria-label="Tabell: NVDA på Windows"><table><thead><tr>
-<th scope="col">Åtgärd</th>
-<th scope="col">Stationär layout</th>
-<th scope="col">Bärbar layout</th>
+<th scope="col">Gör så här</th>
+<th scope="col">Kontrollera</th>
 </tr></thead><tbody>
-<tr><td>Föregående tecken</td><td><code>Numpad 1</code></td><td><code>NVDA+Vänsterpil</code></td></tr>
-<tr><td>Aktuellt tecken</td><td><code>Numpad 2</code></td><td><code>NVDA+Punkt</code></td></tr>
-<tr><td>Nästa tecken</td><td><code>Numpad 3</code></td><td><code>NVDA+Högerpil</code></td></tr>
+<tr><td>Tryck H i bläddringsläge för nästa rubrik. Läs vidare med nedåtpil.</td><td>Beloppets värde, valuta och sammanhang framgår.</td></tr>
+<tr><td>Använd vänster och höger pil i texten.</td><td>Hela numret går att granska tecken för tecken när det behövs.</td></tr>
+<tr><td>Använd Tab till fält och knappar.</td><td>Etikett, roll, värde och knappens funktion framgår. Statisk text behöver inte nås med Tab.</td></tr>
+<tr><td>Växla vid behov med NVDA+Mellanslag.</td><td>Bläddringsläge används för läsning och fokusläge för inmatning.</td></tr>
+<tr><td>Använd Ctrl+Alt+piltangenter i kontotabellen.</td><td>Beloppet kan kopplas till rätt rad och kolumn.</td></tr>
 </tbody></table></div>
-<p>Dubbeltryck på kommandot för aktuellt tecken ger teckenbeskrivning. <code>NVDA+P</code> ändrar symbolnivå. Vid utredning av maskering eller tecken: jämför Något och Alla och logga varje körning separat. Egna tangentbindningar kan skilja sig. <a href="kallor.html#k1">K1</a></p>
-<h2 id="voiceover-pa-macos">VoiceOver på macOS</h2>
-<p><code>VO</code> är vald VoiceOver-modifierare, vanligtvis Control+Option eller Caps Lock. Navigera till texten och interagera vid behov med <code>VO+Skift+Nedåtpil</code>.</p>
-<div class="table-scroll" role="region" tabindex="0" aria-label="Tabell: VoiceOver på macOS"><table><thead><tr>
-<th scope="col">Åtgärd</th>
-<th scope="col">Kommando</th>
-</tr></thead><tbody>
-<tr><td>Läs aktuellt ord</td><td><code>VO+W</code></td></tr>
-<tr><td>Bokstavera aktuellt ord</td><td><code>VO+W</code> två gånger</td></tr>
-<tr><td>Fonetisk bokstavering</td><td><code>VO+W</code> tre gånger</td></tr>
-<tr><td>Läs aktuellt tecken</td><td><code>VO+C</code></td></tr>
-<tr><td>Läs nästa eller föregående ord i text</td><td><code>VO+Högerpil</code> eller <code>VO+Vänsterpil</code></td></tr>
-</tbody></table></div>
-<p>Bokstavering gäller aktuellt ord, inte säkert hela ett nummer med mellanrum. Granska därför samtliga grupper. <a href="kallor.html#k20">K20</a></p>
-<p>Apples aktuella läsguide anger höger/vänster pil för tecken i text. Utfallet på webben beror även på textinteraktion, Quick Nav och markörläge. Kontrollera att kommandot verkligen flyttar ett tecken i den aktuella Safari-miljön; anteckna metoden om det inte fungerar. <code>VO+Högerpil</code> är inte ett generellt kommando för nästa tecken. <a href="kallor.html#k21">K21</a></p>
-<p>Skiljetecken styrs i VoiceOver-verktyg under Utförlighet, Text. Menynamnen kan variera med språk och version. Anteckna vald nivå och eventuella anpassningar. <a href="kallor.html#k2">K2</a></p>
-<h2 id="voiceover-pa-iphone-och-ipad">VoiceOver på iPhone och iPad</h2>
-<p>Gå till teststrängen. Vrid två fingrar som ett vred och välj Tecken i rotorn. Svep nedåt med ett finger för nästa tecken och uppåt för föregående. Om Tecken saknas, kontrollera rotorinställningarna. Granska hela följden och dokumentera hur navigationen fungerade. <a href="kallor.html#k22">K22</a></p>
-<h2 id="talkback-pa-android">TalkBack på Android</h2>
-<p>Gå till teststrängen. Växla läskontroll genom att svepa upp och sedan ned, eller ned och sedan upp, i en sammanhängande enfingerrörelse. Välj Tecken. Svep ned för nästa tecken och upp för föregående. Anpassade gester och enhetsversion kan påverka kommandona. <a href="kallor.html#k23">K23</a></p>
-<h2 id="dokumentera-och-bedom">Dokumentera och bedöm</h2>
-<p>Använd <a href="resultatmall.html">resultatmallen</a>. Håll separata rader för löpande läsning, navigerad läsning och detaljerad granskning. Notera om värdet gick att återge korrekt, vilka tecken som var otydliga, hur mycket extra arbete som krävdes och om uppgiften gick att slutföra.</p>
-<p>En ovan testares misslyckande bevisar inte att teckennavigering är omöjlig. Kontrollera kommandon och ta vid behov hjälp av en van användare. Samtidigt får en tekniskt möjlig men orimligt svår väg inte döljas bakom ett enkelt ”godkänt”.</p>
-<p>Ingen fast tidsgräns eller viss ordalydelse gäller som generellt WCAG-krav. Bedöm uppgiften, och skilj observation, användbarhetsbedömning och konstaterad kravavvikelse åt.</p></main>
-<footer><p>Version 3 · 22 oktober 2026 · <a href="kallor.html">Källor och faktakontroll</a></p>
+<p>Fyll i OCR-fältet, redigera mitt i numret och töm det. Prova sedan betalningsövningen och lyssna efter återkoppling när du aktiverar knappen. NVDA:s talvisare under Verktyg kan hjälpa vid dokumentation, men lyssna också på det faktiska talet.</p>
+<h2 id="voiceover-pa-iphone">VoiceOver på iPhone</h2>
+<p>Slå på VoiceOver under Inställningar, Hjälpmedel, VoiceOver. Öppna sidan i Safari.</p>
+<ol>
+<li>Svep åt höger med ett finger för att gå framåt genom innehållet. Svep åt vänster för att gå tillbaka.</li>
+<li>Använd rotorns Rubriker för att hitta ett exempel. Vrid två fingrar som ett vred, välj Rubriker och svep uppåt eller nedåt.</li>
+<li>Gå till numret. Välj Tecken i rotorn och svep nedåt för nästa tecken, uppåt för föregående. Kontrollera alla grupper. Om Tecken saknas, lägg till det i rotorinställningarna.</li>
+<li>Markera ett fält eller en knapp och dubbeltryck för att aktivera. Prova inmatning, kopiering och betalningsövningens återkoppling.</li>
+</ol>
+<p>För ett vanligt saldo ska informationen vara begriplig vid vanlig läsning. Teckennavigering är främst ett stöd för att kontrollera exakta följder eller precision. Den ersätter inte ett begripligt saldo.</p>
+<h2 id="vad-raknas-som-ett-bra-resultat">Vad räknas som ett bra resultat</h2>
+<p>Rätt uppgift går att förstå, nödvändiga detaljer går att kontrollera och uppgiften går att genomföra. Annan gruppering, pauser eller ord som ”femtio öre” är inte i sig fel.</p>
+<p>Om minus, siffror eller sammanhang saknas ska det utredas. Notera vilken navigering du använde och vad du faktiskt hörde. Ändra inte inställningar utan att notera det. Bedöm även om det är praktiskt rimligt att kontrollera uppgiften.</p>
+<h2 id="dokumentera-vid-behov">Dokumentera vid behov</h2>
+<p>Anteckna exemplet och testdata, sidans version, datum, operativsystem, webbläsare, skärmläsare, röst, språk och symbolnivå. Beskriv vad du gjorde, vad du hörde och om informationen gick att förstå och kontrollera. Håll text från talvisaren och hört tal åtskilda.</p>
+<p>Det finns inget gemensamt uppläsningsmanus som alla röster måste följa. <a href="testfall.html#bedom-det-du-hor">Bedömningsöversikten</a> sammanfattar vad som är okej och vad som behöver utredas.</p>
+<h2 id="kommandon-och-produktmanualer">Kommandon och produktmanualer</h2>
+<p><a href="https://api.nvaccess.org/documentation/userGuide.html">NVDA:s användarhandbok</a> beskriver bläddringsläge, textgranskning och tabellnavigering. <a href="https://support.apple.com/en-ca/111796">Apples guide till VoiceOver-rotorn</a> beskriver rubriker, tecken och gester. Anpassade kommandon kan skilja sig från exemplen här.</p></main>
+<footer><p>Version 4 · 27 oktober 2026 · <a href="kallor.html">Källor</a></p>
 <p><a href="https://github.com/FagerKod/siffror/blob/main/content/testmanual.md">Dokumentets källfil på GitHub</a></p></footer>
 </body>
 </html>
+

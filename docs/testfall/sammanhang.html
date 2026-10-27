@@ -1,155 +1,34 @@
 <!doctype html>
-<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Del tre: tecken och sammanhang | Siffror</title><style>
-  body {
-    max-width: 44rem;
-    margin: 2rem auto;
-    padding: 0 1rem 4rem;
-    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-    line-height: 1.6;
-    color: #1a1a1a;
-    background: #fff;
-  }
-  section { margin: 0 0 3.5rem; }
-  h1 { line-height: 1.3; }
-  h2 { margin-bottom: 0.25rem; }
-  .teststrang { font-size: 1.6rem; margin: 1.25rem 0; }
-  .teststrang button { font: inherit; padding: 0.3rem 0.9rem; }
-  .teststrang a { color: #0645ad; }
-  .lyssna { color: #444; }
-  nav ul { padding-left: 1.25rem; }
-  .teststabell { border-collapse: collapse; margin: 1.25rem 0; }
-  .teststabell caption { text-align: left; font-weight: 600; padding-bottom: 0.4rem; }
-  .teststabell th, .teststabell td {
-    text-align: left;
-    padding: 0.4rem 1.2rem 0.4rem 0.4rem;
-    border: 1px solid #c9c9c9;
-  }
-  .teknik {
-    margin: 1.5rem 0 0;
-    padding: 0.75rem 1rem;
-    border-left: 4px solid #c9c9c9;
-    background: #f6f6f6;
-    font-size: 0.9rem;
-    color: #333;
-  }
-  .teknik-rubrik {
-    margin: 0 0 0.5rem;
-    font-weight: 600;
-    color: #555;
-  }
-  .teknik pre {
-    margin: 0 0 0.75rem;
-    padding: 0.5rem 0.75rem;
-    background: #fff;
-    border: 1px solid #ddd;
-    overflow-x: auto;
-    font-size: 0.85rem;
-    line-height: 1.5;
-  }
-  .teknik dl { margin: 0; }
-  .teknik dt { font-weight: 600; margin-top: 0.5rem; }
-  .teknik dd { margin: 0; }
-  .teknik table { border-collapse: collapse; margin-top: 0.5rem; }
-  .teknik th, .teknik td {
-    text-align: left;
-    vertical-align: top;
-    padding: 0.25rem 0.75rem 0.25rem 0;
-    border-bottom: 1px solid #e0e0e0;
-  }
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Komponenter och ändrade värden · Siffror</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<a class="skip" href="#main">Hoppa till innehållet</a>
+<header><a class="brand" href="../index.html">Siffror</a><p>Lär dig och prova med skärmläsare</p>
+<nav aria-label="Huvudmeny"><ul>
+<li><a href="../vagledning.html">För utvecklare</a></li>
+<li><a href="../testfall.html">Exempel</a></li>
+<li><a href="../testmanual.html">Prova med skärmläsare</a></li>
 
-:focus-visible { outline: 3px solid #774200; outline-offset: 4px; }
-summary { cursor: pointer; padding: .5rem 0; }
-pre { white-space: pre-wrap; overflow-wrap: anywhere; }
-.teststrang { font-size: clamp(1.1rem, 4vw, 1.6rem); }
-.skip { position: absolute; top: -6rem; } .skip:focus { top: 0; background: white; }
-</style></head>
-<body><a class="skip" href="#main">Hoppa till testfallen</a>
-<header><p><a href="../index.html">Siffror</a> / <a href="../testfall.html">Alla testfall</a></p></header>
-<main id="main"><h1>Del tre: tecken och sammanhang</h1>
-<p>Version 3. Läs först i löpande läsning, sedan genom navigering. Dokumentera paneltext och faktiskt hört tal separat. Följ <a href="../testmanual.html">testmanualen</a>.</p>
-<p>Låt de tekniska detaljerna vara stängda tills du dokumenterat observationen. Alla kan öppna dem efteråt. Teststrängarna är endast till för observation; aktivera inte telefonlänken. Testknappen genomför ingen betalning. Tc-06 och tc-07 är teknikjämförelser och ska inte kopieras som standardlösningar.</p>
-<nav><h2>Testfall på sidan</h2><ul><li><a href="#tc-12">tc-12</a></li><li><a href="#tc-13">tc-13</a></li><li><a href="#tc-14">tc-14</a></li><li><a href="#tc-15">tc-15</a></li><li><a href="#tc-16">tc-16</a></li><li><a href="#tc-17">tc-17</a></li><li><a href="#tc-18">tc-18</a></li><li><a href="#tc-19">tc-19</a></li><li><a href="#tc-20">tc-20</a></li><li><a href="#tc-21">tc-21</a></li></ul></nav>
-<section id="tc-12">
-<h2>tc-12, belopp F</h2>
-  <!-- Tecken: vanligt bindestreck U+002D först, decimalkomma U+002C, vanligt blanksteg U+0020 före enheten. Får inte bytas mot U+2212. -->
-  <p class="teststrang" data-tc="tc-12">-134,50 kr</p>
-  <p class="lyssna">Lyssna efter: framgår det att beloppet är negativt, och skulle du kunna avgöra kontots ställning enbart på det du hörde?</p>
-<details class="teknik"><summary>Tekniska detaljer för tc-12</summary><p>Jämför värde eller sifferföljd, enhet och sammanhang. Bedöm enligt vägledningen; något visst uttal är inte förutbestämt.</p><pre><code>&lt;p class=&quot;teststrang&quot; data-tc=&quot;tc-12&quot;&gt;-134,50 kr&lt;/p&gt;</code></pre></details>
-</section><section id="tc-13">
-<h2>tc-13, belopp G</h2>
-  <!-- Tecken: riktigt minustecken U+2212, skrivet som &#8722;. Decimalkomma U+002C. Vanligt blanksteg före enheten. -->
-  <p class="teststrang" data-tc="tc-13">&#8722;134,50 kr</p>
-  <p class="lyssna">Lyssna efter: skiljer sig uppläsningen från föregående testfall, och framgår det att beloppet är negativt?</p>
-<details class="teknik"><summary>Tekniska detaljer för tc-13</summary><p>Jämför värde eller sifferföljd, enhet och sammanhang. Bedöm enligt vägledningen; något visst uttal är inte förutbestämt.</p><pre><code>&lt;p class=&quot;teststrang&quot; data-tc=&quot;tc-13&quot;&gt;&amp;#8722;134,50 kr&lt;/p&gt;</code></pre></details>
-</section><section id="tc-14">
-<h2>tc-14, belopp H</h2>
-  <!-- Gruppering: hårt mellanslag U+00A0, skrivet som &#160;, även före enheten. Decimalkomma U+002C. -->
-  <p class="teststrang" data-tc="tc-14">1&#160;345&#160;876,50&#160;kr</p>
-  <p class="lyssna">Lyssna efter: var i uppläsningen kommer enheten, och hänger heltalsdelen och decimaldelen ihop?</p>
-<details class="teknik"><summary>Tekniska detaljer för tc-14</summary><p>Jämför värde eller sifferföljd, enhet och sammanhang. Bedöm enligt vägledningen; något visst uttal är inte förutbestämt.</p><pre><code>&lt;p class=&quot;teststrang&quot; data-tc=&quot;tc-14&quot;&gt;1&amp;#160;345&amp;#160;876,50&amp;#160;kr&lt;/p&gt;</code></pre></details>
-</section><section id="tc-15">
-<h2>tc-15, värde B</h2>
-  <!-- Tecken: decimalkomma U+002C, vanligt blanksteg U+0020, versal valutakod. -->
-  <p class="teststrang" data-tc="tc-15">0,3120 EUR</p>
-  <p class="lyssna">Lyssna efter: bokstaveras valutakoden, läses den som ett ord, och kommer den på samma plats som i det tidigare testfallet med utskriven enhet?</p>
-<details class="teknik"><summary>Tekniska detaljer för tc-15</summary><p>Jämför värde eller sifferföljd, enhet och sammanhang. Bedöm enligt vägledningen; något visst uttal är inte förutbestämt.</p><pre><code>&lt;p class=&quot;teststrang&quot; data-tc=&quot;tc-15&quot;&gt;0,3120 EUR&lt;/p&gt;</code></pre></details>
-</section><section id="tc-16">
-<h2>tc-16, sifferföljd F</h2>
-  <!-- Separator: vanligt blanksteg U+0020, identiskt med tc-08. Skillnaden är att strängen ligger i en länk. -->
-  <p class="teststrang"><a href="tel:+46701234567" data-tc="tc-16">070 123 45 67</a></p>
-  <p class="lyssna">Lyssna efter: annonseras länken, läses numret likadant som i tc-08, och sägs något av innehållet i adressen?</p>
-<details class="teknik"><summary>Tekniska detaljer för tc-16</summary><p>Jämför värde eller sifferföljd, enhet och sammanhang. Bedöm enligt vägledningen; något visst uttal är inte förutbestämt.</p><pre><code>&lt;p class=&quot;teststrang&quot;&gt;&lt;a href=&quot;tel:+46701234567&quot; data-tc=&quot;tc-16&quot;&gt;070 123 45 67&lt;/a&gt;&lt;/p&gt;</code></pre></details>
-</section><section id="tc-17">
-<h2>tc-17, belopp I</h2>
-  <!-- Gruppering: hårt mellanslag U+00A0, skrivet som &#160;, även före enheten. Strängen ligger i en knapp. -->
-  <p class="teststrang"><button type="button" data-tc="tc-17">Betala 1&#160;345&#160;876&#160;kr</button></p>
-  <p class="lyssna">Lyssna efter: läses beloppet likadant som i löptext, och ändrar knappens roll uppläsningen?</p>
-<details class="teknik"><summary>Tekniska detaljer för tc-17</summary><p>Jämför värde eller sifferföljd, enhet och sammanhang. Bedöm enligt vägledningen; något visst uttal är inte förutbestämt.</p><pre><code>&lt;p class=&quot;teststrang&quot;&gt;&lt;button type=&quot;button&quot; data-tc=&quot;tc-17&quot;&gt;Betala 1&amp;#160;345&amp;#160;876&amp;#160;kr&lt;/button&gt;&lt;/p&gt;</code></pre></details>
-</section><section id="tc-18">
-<h2>tc-18, belopp J</h2>
-  <!-- Gruppering i saldocellen: hårt mellanslag U+00A0, skrivet som &#160;, även före enheten. Kontonumret är ogrupperat. -->
-  <table class="teststabell">
-    <caption>Konton</caption>
-    <thead>
-      <tr><th scope="col">Konto</th><th scope="col">Saldo</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Sparkonto 3835789</td>
-        <td class="teststrang" data-tc="tc-18">1&#160;345&#160;876&#160;kr</td>
-      </tr>
-    </tbody>
-  </table>
-  <p class="lyssna">Lyssna efter: sägs ordet Saldo tillsammans med beloppet vid löpande läsning, eller bara när du navigerar i tabellen?</p>
-<details class="teknik"><summary>Tekniska detaljer för tc-18</summary><p>Jämför värde eller sifferföljd, enhet och sammanhang. Bedöm enligt vägledningen; något visst uttal är inte förutbestämt.</p><pre><code>&lt;table class=&quot;teststabell&quot;&gt;
-    &lt;caption&gt;Konton&lt;/caption&gt;
-    &lt;thead&gt;
-      &lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Konto&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Saldo&lt;/th&gt;&lt;/tr&gt;
-    &lt;/thead&gt;
-    &lt;tbody&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Sparkonto 3835789&lt;/td&gt;
-        &lt;td class=&quot;teststrang&quot; data-tc=&quot;tc-18&quot;&gt;1&amp;#160;345&amp;#160;876&amp;#160;kr&lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/tbody&gt;
-  &lt;/table&gt;</code></pre></details>
-</section><section id="tc-19">
-<h2>tc-19, värde C</h2>
-  <!-- Tecken: decimalkomma U+002C, vanligt blanksteg U+0020 före procenttecknet enligt svensk konvention. -->
-  <p class="teststrang" data-tc="tc-19">12,5 %</p>
-  <p class="lyssna">Lyssna efter: läses procenttecknet, och hänger det ihop med talet?</p>
-<details class="teknik"><summary>Tekniska detaljer för tc-19</summary><p>Jämför värde eller sifferföljd, enhet och sammanhang. Bedöm enligt vägledningen; något visst uttal är inte förutbestämt.</p><pre><code>&lt;p class=&quot;teststrang&quot; data-tc=&quot;tc-19&quot;&gt;12,5 %&lt;/p&gt;</code></pre></details>
-</section><section id="tc-20">
-<h2>tc-20, värde D</h2>
-  <!-- Tecken: upphöjd tvåa U+00B2, skriven som &#178;. Vanligt blanksteg U+0020 mellan tal och enhet. -->
-  <p class="teststrang" data-tc="tc-20">45 m&#178;</p>
-  <p class="lyssna">Lyssna efter: framgår det att det handlar om kvadratmeter, eller låter det som meter eller som en lös tvåa?</p>
-<details class="teknik"><summary>Tekniska detaljer för tc-20</summary><p>Jämför värde eller sifferföljd, enhet och sammanhang. Bedöm enligt vägledningen; något visst uttal är inte förutbestämt.</p><pre><code>&lt;p class=&quot;teststrang&quot; data-tc=&quot;tc-20&quot;&gt;45 m&amp;#178;&lt;/p&gt;</code></pre></details>
-</section><section id="tc-21">
-<h2>tc-21, belopp K</h2>
-  <!-- Gruppering: smalt hårt mellanslag U+202F, skrivet som &#8239;, även före enheten. Får inte bytas mot U+00A0. -->
-  <p class="teststrang" data-tc="tc-21">1&#8239;345&#8239;876&#8239;kr</p>
-  <p class="lyssna">Lyssna efter: skiljer sig uppläsningen från tc-01, samma belopp med hårt mellanslag?</p>
-<details class="teknik"><summary>Tekniska detaljer för tc-21</summary><p>Jämför värde eller sifferföljd, enhet och sammanhang. Bedöm enligt vägledningen; något visst uttal är inte förutbestämt.</p><pre><code>&lt;p class=&quot;teststrang&quot; data-tc=&quot;tc-21&quot;&gt;1&amp;#8239;345&amp;#8239;876&amp;#8239;kr&lt;/p&gt;</code></pre></details>
-</section>
-</main><footer><p><a href="../testfall.html">Till alla testfall</a> · <a href="../resultatmall.html">Resultatmall</a></p></footer></body></html>
+</ul></nav></header>
+<main id="main" tabindex="-1"><h1>Komponenter och ändrade värden</h1><p>Prova hur samma aktuella data visas i fält, sammanställning och knapp. Övningen skickar ingenting.</p><p><a href="../testmanual.html">Instruktioner för NVDA och VoiceOver</a>. Bedöm information och funktion, inte ett exakt uttal. Alla uppgifter är exempel.</p><nav aria-label="Exempel på sidan"><ul><li><a href="#betalning">Betalningsövning</a></li></ul></nav><section id="betalning"><h2>Betalningsövning</h2><p><strong>Krav:</strong> Uppgiften ska fungera i komponenterna och ändrade värden ska stämma överens överallt.</p>
+<h3>Prova själv</h3><div class="demo"><p><strong>Övning:</strong> Ingen betalning genomförs och inga uppgifter skickas.</p><form id="payment-form" novalidate><fieldset id="payment-fields" disabled><legend>Uppgifter för övningen</legend>
+<label for="account">Från konto</label><select id="account" name="account"><option value="Lönekonto">Lönekonto</option><option value="Sparkonto">Sparkonto</option></select>
+<label for="amount">Belopp</label><p id="amount-help">Ange ett positivt belopp med högst två decimaler, exempelvis 1 234,50. Högst 999 999 999,99 i denna övning. Mellanslag får gruppera tusental.</p><input id="amount" name="amount" type="text" inputmode="decimal" value="1 234,50" aria-describedby="amount-help payment-error">
+<label for="currency">Valuta</label><select id="currency" name="currency"><option value="SEK">SEK</option><option value="EUR">EUR</option></select>
+<p id="payment-error" class="error"></p><p id="payment-summary">Betalning från Lönekonto: 1 234,50 kr</p><button id="pay" type="submit">Betala 1 234,50 kr</button><p id="payment-status" role="status"></p></fieldset></form><noscript><p>Aktivera JavaScript för denna interaktiva övning. Ingen betalning kan genomföras.</p></noscript></div>
+<p><strong>Gör så här:</strong> Byt konto, belopp och valuta. Läs sammanställningen och gå till knappen. Aktivera den för att få en övningsbekräftelse. Töm beloppet, prova 0 och ett felaktigt värde och aktivera knappen igen. Prova även 999 999 999,99.</p><p><strong>Förväntat resultat:</strong> Sammanställning och knapptext visar det aktuella beloppet och valutan. Bekräftelsen innehåller rätt konto. Ett tomt fält visas som saknat belopp och blir inte noll. Ogiltigt format ger ett kopplat felmeddelande. Ingen gammal bekräftelse ligger kvar efter redigering.</p>
+<details><summary>HTML och implementation för betalningsövning</summary><pre><code>&lt;label for=&quot;amount&quot;&gt;Belopp&lt;/label&gt;
+&lt;input id=&quot;amount&quot; name=&quot;amount&quot; type=&quot;text&quot; inputmode=&quot;decimal&quot;&gt;
+&lt;p&gt;Betalning från Lönekonto: 1 234,50 kr&lt;/p&gt;
+&lt;button type=&quot;submit&quot;&gt;Betala 1 234,50 kr&lt;/button&gt;
+&lt;p role=&quot;status&quot;&gt;&lt;/p&gt;</code></pre><p>All uppdatering utgår från de aktuella fältvärdena. Fälttexten ändras inte under inmatning. Här används två decimaler enligt övningens formatregler. I React kan sammanställning och knapptext härledas från samma state. Statusregionen uppdateras vid bekräftelsen; hela formuläret är inte en live-region.</p></details></section></main>
+<footer><p>Version 4 · 27 oktober 2026 · <a href="../kallor.html">Källor</a></p>
+<p><a href="https://github.com/FagerKod/siffror/blob/main/docs/testfall/sammanhang.html">Dokumentets källfil på GitHub</a></p></footer>
+<script src="../examples.js" defer></script></body>
+</html>
+

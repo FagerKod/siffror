@@ -3,97 +3,43 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Källor och faktakontroll · Siffror</title>
+<title>Källor och vidare läsning · Siffror</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <a class="skip" href="#main">Hoppa till innehållet</a>
-<header><a class="brand" href="index.html">Siffror</a><p>Vägledning och testunderlag</p>
+<header><a class="brand" href="index.html">Siffror</a><p>Lär dig och prova med skärmläsare</p>
 <nav aria-label="Huvudmeny"><ul>
-<li><a href="vagledning.html">Vägledning</a></li>
-<li><a href="testfall.html">Testfall</a></li>
-<li><a href="testmanual.html">Testmanual</a></li>
-<li><a href="resultat.html">Resultat</a></li>
+<li><a href="vagledning.html">För utvecklare</a></li>
+<li><a href="testfall.html">Exempel</a></li>
+<li><a href="testmanual.html">Prova med skärmläsare</a></li>
+
 </ul></nav></header>
-<main id="main" tabindex="-1"><h1 id="kallor-och-faktakontroll">Källor och faktakontroll</h1>
-<p>Faktakontrollerad 22 oktober 2026 mot primärkällor från W3C, WHATWG, NV Access, Apple, Google, Unicode och Ecma. Utgångspunkt: den mer utvecklade lokala versionen av riktlinje 2 samt projektets testkod och anteckningar.</p>
-<p>Standardtexter avgör vad attribut och kriterier betyder. Produktmanualer beskriver kommandon och inställningar. Ingen av dessa källtyper bevisar ett visst svenskt uttal av våra teststrängar; sådana påståenden kräver dokumenterade praktiska tester.</p>
-<nav class="toc" aria-label="På sidan"><strong>På sidan</strong><ul><li><a href="#rattelser-och-avgransningar">Rättelser och avgränsningar</a></li><li><a href="#k1">K1</a></li><li><a href="#k2">K2</a></li><li><a href="#k3">K3</a></li><li><a href="#k4">K4</a></li><li><a href="#k5">K5</a></li><li><a href="#k6">K6</a></li><li><a href="#k7">K7</a></li><li><a href="#k8">K8</a></li><li><a href="#k9">K9</a></li><li><a href="#k10">K10</a></li><li><a href="#k11">K11</a></li><li><a href="#k12">K12</a></li><li><a href="#k13">K13</a></li><li><a href="#k14">K14</a></li><li><a href="#k15">K15</a></li><li><a href="#k16">K16</a></li><li><a href="#k17">K17</a></li><li><a href="#k18">K18</a></li><li><a href="#k19">K19</a></li><li><a href="#k20">K20</a></li><li><a href="#k21">K21</a></li><li><a href="#k22">K22</a></li><li><a href="#k23">K23</a></li><li><a href="#sa-halls-innehallet-aktuellt">Så hålls innehållet aktuellt</a></li></ul></nav>
-<h2 id="rattelser-och-avgransningar">Rättelser och avgränsningar</h2>
-<div class="table-scroll" role="region" tabindex="0" aria-label="Tabell: Rättelser och avgränsningar"><table><thead><tr>
-<th scope="col">Påstående eller instruktion i underlaget</th>
-<th scope="col">Resultat av granskningen</th>
-</tr></thead><tbody>
-<tr><td>Korrekt HTML och språk betyder att vårt ansvar är färdigt</td><td>För kategoriskt. Tillgänglighetsstöd och praktisk åtkomst måste också bedömas. K3.</td></tr>
-<tr><td>Alla separatorer ger samma uppläsning</td><td>Begränsat till antecknade körningar av tc-01–03. U+202F och andra miljöer är inte därmed verifierade.</td></tr>
-<tr><td>Ingen formatering av identifierare kan fungera i båda skärmläsarna</td><td>Kan inte härledas från två testvarianter och ofullständigt dokumenterade miljöer. Ersatt med uppgiftsbaserad bedömning.</td></tr>
-<tr><td>Alla siffror finns i textnoden, alltså är åtkomsten tillräcklig</td><td>Inte visat. Teckengranskning och praktisk verifiering återstår.</td></tr>
-<tr><td>aria-label på span är opålitligt</td><td>Starkare och mer precis regel: namngivning är förbjuden för elementets implicita roll. K13.</td></tr>
-<tr><td>CSS-genererat innehåll når inte hjälpmedel</td><td>Fel som generell regel. F87 är indraget. CSS-avstånd ska skiljas från genererat textinnehåll. K14.</td></tr>
-<tr><td>Bindestreck uttalas inte som minus och U+2010 skulle inte hjälpa</td><td>Utfallet är kontext- och miljöberoende; U+2010 testades inte. U+2212 är ett riktigt matematiskt minustecken. K15.</td></tr>
-<tr><td>Alla alternativa Unicode-tecken ska undvikas</td><td>Ersatt med semantiskt lämpliga tecken, formatkrav och tester. Ett generellt förbud skulle även träffa riktiga minustecken och hårda mellanslag.</td></tr>
-<tr><td>Asteriskerna försvann på grund av NVDA:s symbolnivå</td><td>Möjlig förklaring, inte konstaterad orsak när inställningen saknas. K1.</td></tr>
-<tr><td>Dold text plus aria-hidden är en generellt godkänd undantagsteknik</td><td>Mekanismen kräver likvärdig information, rätt användning och tester i sitt sammanhang. K18.</td></tr>
-<tr><td>Kopiering får alltid med båda textversionerna</td><td>Beror på konstruktion, markering och miljö. Nu en kontrollpunkt, inte ett universellt resultat.</td></tr>
-<tr><td>NVDA+Numpad 1/2/3 granskar tecken</td><td>Fel för stationär standardlayout. Kommandona är Numpad 1/2/3 utan NVDA. K1.</td></tr>
-<tr><td>VO+Högerpil stegar tecken</td><td>Beskriver inte generellt teckennavigering; i text är det ett ordkommando. K20–21.</td></tr>
-<tr><td>VO+W verifierar hela ett grupperat nummer</td><td>Bokstavering gäller aktuellt ord. Alla grupper måste granskas. K20.</td></tr>
-<tr><td>VoiceOvers skiljeteckennivå finns under Tal</td><td>Aktuell guide anger Utförlighet, Text. K2.</td></tr>
-<tr><td>TalkBacks läskontroller öppnas med upp och höger</td><td>Rättat till upp–ned eller ned–upp; därefter väljs Tecken. K23.</td></tr>
-<tr><td>Talvisaren är en exakt utskrift av hur talsyntesen uttalar talet</td><td>Otillräckligt underlag för uttalsanalys. Text och hört tal hålls isär.</td></tr>
-<tr><td>De äldre testfallen ska inte köras om</td><td>Rättat. Fullständigt dokumenterade omkörningar behövs för reproducerbart beslutsunderlag.</td></tr>
-<tr><td>Om testaren inte kan skriva numret ur minnet fungerar inte teckennavigering</td><td>Ersatt med att skriva under granskningen och slutföra en realistisk uppgift.</td></tr>
-<tr><td>Teknikrutorna ska döljas för alla hjälpmedelsanvändare</td><td>Ersatt med stängda details-element som alla kan öppna efter sin observation. Teststrängarna är bevarade.</td></tr>
-</tbody></table></div>
-<h2 id="k1">K1</h2>
-<p><a href="https://api.nvaccess.org/documentation/userGuide.html">NVDA User Guide</a>. Avsnitten Browse Mode, Reviewing Text, Punctuation/Symbol Level och Speech Viewer. Den lästa guiden anger NVDA 2026.2; använd guiden för installerad version vid avvikelser.</p>
-<h2 id="k2">K2</h2>
-<p><a href="https://support.apple.com/en-euro/guide/voiceover/vod1f1248b5e/mac">Apple om skiljetecken i VoiceOver</a>. Inställningar och egna skiljeteckengrupper.</p>
-<h2 id="k3">K3</h2>
-<p><a href="https://www.w3.org/TR/WCAG22/">WCAG 2.2</a>. Normativa kriterier och avsnitt 5.2.4 om tillgänglighetsstöd. Vägledningen gör ingen fullständig WCAG- eller EN 301 549-granskning av en produkt.</p>
-<h2 id="k4">K4</h2>
-<p><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html">Understanding 1.3.1 Info and Relationships</a>. Samband och struktur ska kunna uppfattas även utan den visuella presentationen.</p>
-<h2 id="k5">K5</h2>
-<p><a href="https://www.w3.org/WAI/WCAG22/Understanding/meaningful-sequence.html">Understanding 1.3.2 Meaningful Sequence</a>. Meningsbärande läsordning.</p>
-<h2 id="k6">K6</h2>
-<p><a href="https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html">Understanding 1.4.1 Use of Color</a>. Färg får inte vara enda visuella informationsbärare.</p>
-<h2 id="k7">K7</h2>
-<p><a href="https://www.w3.org/WAI/WCAG22/Understanding/label-in-name.html">Understanding 2.5.3 Label in Name</a>. Synlig textetikett och tillgängligt namn på kontroller. Avser inte ett krav på identiskt hörbart uttal.</p>
-<h2 id="k8">K8</h2>
-<p><a href="https://www.w3.org/WAI/WCAG22/Understanding/language-of-page.html">Understanding 3.1.1 Language of Page</a>. Sidans språk ger förutsättningar för språkanpassad presentation.</p>
-<h2 id="k9">K9</h2>
-<p><a href="https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html">Understanding 3.1.2 Language of Parts</a>. Språkbyten och undantag.</p>
-<h2 id="k10">K10</h2>
-<p><a href="https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html">Understanding 4.1.3 Status Messages</a>. Omfattar statusmeddelanden enligt kriteriets definition, inte varje DOM-ändring.</p>
-<h2 id="k11">K11</h2>
-<p><a href="https://www.w3.org/WAI/WCAG22/Understanding/reflow.html">Understanding 1.4.10 Reflow</a>. Förstoring och smala vyer utan informationsförlust.</p>
-<h2 id="k12">K12</h2>
-<p><a href="https://402.ecma-international.org/13.0/">ECMA-402, utgåva 13</a>. NumberFormat och precision. Ger ingen garanti för identisk talsyntesutdata.</p>
-<h2 id="k13">K13</h2>
-<p><a href="https://www.w3.org/TR/html-aria/#naming">ARIA in HTML, avsnitt 4.1</a>. Förbud mot namngivning på roller som inte får namnges; exemplen omfattar span, div och p.</p>
-<h2 id="k14">K14</h2>
-<p><a href="https://www.w3.org/WAI/WCAG21/Techniques/failures/F87">W3C:s indragna felexempel F87</a>. CSS-genererat innehåll innebär inte alltid ett WCAG-fel. Rekommendationen att använda riktig text här är ett robusthetsval.</p>
-<h2 id="k15">K15</h2>
-<p><a href="https://www.unicode.org/faq/punctuation_symbols.html">Unicode FAQ om skiljetecken och symboler</a>. U+002D, U+2010 och U+2212 har olika definierade funktioner. Teckendefinitionerna säger inte hur en svensk röst uttalar varje sammanhang.</p>
-<h2 id="k16">K16</h2>
-<p><a href="https://html.spec.whatwg.org/multipage/input.html#number-state-(type=number)">HTML Standard om input type number</a>. Skiljer numeriska värden från identifierare med siffror.</p>
-<h2 id="k17">K17</h2>
-<p><a href="https://html.spec.whatwg.org/multipage/interaction.html#attr-inputmode">HTML Standard om inputmode</a>. Hint om lämplig inmatningsmekanism.</p>
-<h2 id="k18">K18</h2>
-<p><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-hidden">WAI-ARIA 1.2 om aria-hidden</a> och <a href="https://www.w3.org/TR/html-aria/">ARIA in HTML</a>. Döljning, likvärdig information och restriktioner för fokuserbara element.</p>
-<h2 id="k19">K19</h2>
-<p><a href="https://support.apple.com/en-euro/guide/voiceover/unac078/mac">Apple om textpanel och punktskriftspanel</a>. Panelerna är stöd vid observation, inte dokumentation av våra utförda tester.</p>
-<h2 id="k20">K20</h2>
-<p><a href="https://support.apple.com/guide/voiceover/text-commands-cpvokys06/mac">Apple om textkommandon</a>. Ord, tecken, bokstavering och modifierare.</p>
-<h2 id="k21">K21</h2>
-<p><a href="https://support.apple.com/guide/voiceover/read-text-vo2706/mac">Apple om att läsa text</a>. Textgranskning; välj dokumentation för den macOS-version som används. Praktisk åtkomst till våra teststrängar återstår att testa.</p>
-<h2 id="k22">K22</h2>
-<p><a href="https://support.apple.com/en-ca/111796">Apple om VoiceOver-rotorn på iPhone och iPad</a>. Granularitet och nästa/föregående objekt.</p>
-<h2 id="k23">K23</h2>
-<p><a href="https://support.google.com/accessibility/android/answer/6007066?hl=en">Google om TalkBacks läskontroller</a>. Val av teckengranularitet och navigeringsgester.</p>
-<h2 id="sa-halls-innehallet-aktuellt">Så hålls innehållet aktuellt</h2>
-<p>Ändra rekommendationer när nya reproducerbara fynd motiverar det. Lägg nya observationer under Resultat med testversion och miljö. Ett påstående om vad en viss kombination faktiskt säger ska alltid gå att skilja från standardens krav och vår rekommenderade arbetspraxis.</p></main>
-<footer><p>Version 3 · 22 oktober 2026 · <a href="kallor.html">Källor och faktakontroll</a></p>
+<main id="main" tabindex="-1"><h1 id="kallor-och-vidare-lasning">Källor och vidare läsning</h1>
+<p>Kortguiden i Confluence är utgångspunkt för innehållet. Källorna nedan förklarar tekniken och skärmläsarnas kommandon. De garanterar inte ett visst svenskt uttal av ett exempel.</p>
+<nav class="toc" aria-label="På sidan"><strong>På sidan</strong><ul><li><a href="#html-och-react">HTML och React</a></li><li><a href="#information-och-funktion">Information och funktion</a></li><li><a href="#skarmlasare">Skärmläsare</a></li></ul></nav>
+<h2 id="html-och-react">HTML och React</h2>
+<ul>
+<li><a href="https://html.spec.whatwg.org/multipage/input.html">HTML Standard om inmatningsfält</a> beskriver bland annat textfält och skillnaden mellan tal och sifferidentifierare.</li>
+<li><a href="https://react.dev/reference/react-dom/components/input">React om input</a> beskriver kontrollerade fält, value, onChange och markörproblem.</li>
+<li><a href="https://www.w3.org/TR/html-aria/">ARIA in HTML</a> beskriver vilka element som kan ges tillgängliga namn.</li>
+</ul>
+<h2 id="information-och-funktion">Information och funktion</h2>
+<ul>
+<li><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html">Information och relationer</a> för samband mellan konto, rubrik, etikett och värde.</li>
+<li><a href="https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html">Användning av färg</a> för information som inte får förmedlas enbart genom färg.</li>
+<li><a href="https://www.w3.org/WAI/WCAG22/Understanding/label-in-name.html">Etikett i namn</a> för synlig text och kontrollens tillgängliga namn.</li>
+<li><a href="https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html">Statusmeddelanden</a> för återkoppling utan fokusflytt.</li>
+<li><a href="https://www.w3.org/WAI/WCAG22/Understanding/reflow.html">Reflow</a> för små vyer och förstoring.</li>
+</ul>
+<h2 id="skarmlasare">Skärmläsare</h2>
+<ul>
+<li><a href="https://api.nvaccess.org/documentation/userGuide.html">NVDA:s användarhandbok</a>.</li>
+<li><a href="https://support.apple.com/en-ca/111796">VoiceOver-rotorn på iPhone</a>.</li>
+</ul>
+<p>Bedöm den faktiska informationen och funktionen i tjänstens stödda miljöer. Denna fördjupning ersätter inte en fullständig tillgänglighetsgranskning.</p></main>
+<footer><p>Version 4 · 27 oktober 2026 · <a href="kallor.html">Källor</a></p>
 <p><a href="https://github.com/FagerKod/siffror/blob/main/content/kallor.md">Dokumentets källfil på GitHub</a></p></footer>
 </body>
 </html>
+

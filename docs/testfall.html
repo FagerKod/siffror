@@ -3,50 +3,55 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Testfall för uppläsning · Siffror</title>
+<title>Krav och praktiska exempel · Siffror</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <a class="skip" href="#main">Hoppa till innehållet</a>
-<header><a class="brand" href="index.html">Siffror</a><p>Vägledning och testunderlag</p>
+<header><a class="brand" href="index.html">Siffror</a><p>Lär dig och prova med skärmläsare</p>
 <nav aria-label="Huvudmeny"><ul>
-<li><a href="vagledning.html">Vägledning</a></li>
-<li><a href="testfall.html">Testfall</a></li>
-<li><a href="testmanual.html">Testmanual</a></li>
-<li><a href="resultat.html">Resultat</a></li>
+<li><a href="vagledning.html">För utvecklare</a></li>
+<li><a href="testfall.html">Exempel</a></li>
+<li><a href="testmanual.html">Prova med skärmläsare</a></li>
+
 </ul></nav></header>
-<main id="main" tabindex="-1"><h1 id="testfall-for-upplasning">Testfall för uppläsning</h1>
-<p>Testsviten innehåller 21 jämförelsefall. Test-ID:n, siffersträngar, separatorer och de prövade HTML-elementen är bevarade från originalet. Sidornas instruktioner och navigering har uppdaterats i version 3.</p>
-<nav class="toc" aria-label="På sidan"><strong>På sidan</strong><ul><li><a href="#tre-testsidor">Tre testsidor</a></li><li><a href="#vad-jamfors">Vad jämförs</a></li><li><a href="#tekniska-detaljer-finns-for-alla">Tekniska detaljer finns för alla</a></li><li><a href="#vad-sviten-inte-tacker">Vad sviten inte täcker</a></li></ul></nav>
-<h2 id="tre-testsidor">Tre testsidor</h2>
-<ul>
-<li><a href="testfall/index.html">Del ett — belopp och identifierare, tc-01 till tc-07</a></li>
-<li><a href="testfall/identifierare.html">Del två — telefonnummer, decimaler och maskering, tc-08 till tc-11</a></li>
-<li><a href="testfall/sammanhang.html">Del tre — tecken och sammanhang, tc-12 till tc-21</a></li>
-</ul>
-<p>Läs <a href="testmanual.html">testmanualen</a> innan du börjar. Använd <a href="resultatmall.html">resultatmallen</a> för en körning per miljö.</p>
-<h2 id="vad-jamfors">Vad jämförs</h2>
-<div class="table-scroll" role="region" tabindex="0" aria-label="Tabell: Vad jämförs"><table><thead><tr>
-<th scope="col">Testfall</th>
-<th scope="col">Innehåll</th>
+<main id="main" tabindex="-1"><h1 id="krav-och-praktiska-exempel">Krav och praktiska exempel</h1>
+<p>Varje exempel följer kortguiden: krav, implementation och förväntat testresultat. Börja med den uppgift som du utvecklar eller testar.</p>
+<nav class="toc" aria-label="På sidan"><strong>På sidan</strong><ul><li><a href="#hitta-ratt-exempel">Hitta rätt exempel</a></li><li><a href="#bedom-det-du-hor">Bedöm det du hör</a></li><li><a href="#prova-aven-gransfallen">Prova även gränsfallen</a></li></ul></nav>
+<h2 id="hitta-ratt-exempel">Hitta rätt exempel</h2>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Tabell: Hitta rätt exempel"><table><thead><tr>
+<th scope="col">Krav i kortguiden</th>
+<th scope="col">Exempel på webbplatsen</th>
+<th scope="col">Förväntad information eller funktion</th>
 </tr></thead><tbody>
-<tr><td>tc-01–03</td><td>Samma belopp med hårt mellanslag, vanligt mellanslag och utan gruppering.</td></tr>
-<tr><td>tc-04–05</td><td>Samma 16-siffriga identifierare med och utan gruppering.</td></tr>
-<tr><td>tc-06</td><td>Synlig text med aria-hidden och en visuellt dold dubblett. En mekanismjämförelse, inte rekommenderad standardlösning.</td></tr>
-<tr><td>tc-07</td><td>aria-label på span. Avsiktligt felaktig ARIA-användning för observation, aldrig en godkänd implementationsmall.</td></tr>
-<tr><td>tc-08–11</td><td>Telefonnummer, decimalvärde, personnummerliknande sträng och maskerat nummer.</td></tr>
-<tr><td>tc-12–13</td><td>Negativa belopp med U+002D respektive U+2212.</td></tr>
-<tr><td>tc-14–15</td><td>Grupperat decimalbelopp och valutakod.</td></tr>
-<tr><td>tc-16–18</td><td>Telefonlänk, betalningsknapp utan funktion och belopp i tabell.</td></tr>
-<tr><td>tc-19–21</td><td>Procent, kvadratmeter och smalt hårt mellanslag.</td></tr>
+<tr><td>Begripliga belopp och saldo</td><td><a href="testfall/index.html#belopp">Belopp och konto</a></td><td>Rätt belopp, decimalvärde, valuta och konto.</td></tr>
+<tr><td>Negativt skiljs från positivt</td><td><a href="testfall/index.html#minus">Negativt saldo</a></td><td>Värdet uppfattas som negativt vid vanlig läsning.</td></tr>
+<tr><td>Noll, saknad uppgift och laddning skiljs åt</td><td><a href="testfall/index.html#tillstand">Tre olika tillstånd</a></td><td>Saknad eller ännu inte hämtad information blir inte noll.</td></tr>
+<tr><td>Nödvändig precision bevaras</td><td><a href="testfall/index.html#precision">Decimaler</a></td><td>Rätt värde och möjlighet att granska alla nödvändiga decimaler.</td></tr>
+<tr><td>OCR, konto och IBAN bevaras</td><td><a href="testfall/identifierare.html#ocr-exempel">Nummer och inmatning</a></td><td>Hela följden, inklusive nollor och bokstäver, går att kontrollera.</td></tr>
+<tr><td>Telefonnummer går att använda</td><td><a href="testfall/identifierare.html#telefon">Telefonlänk</a></td><td>Samma nummer visas och används i länkmålet.</td></tr>
+<tr><td>Maskering är begriplig</td><td><a href="testfall/identifierare.html#maskering">Kortets sista siffror</a></td><td>Det framgår att endast de sista siffrorna visas.</td></tr>
+<tr><td>Enhet och betydelse framgår</td><td><a href="testfall/index.html#betydelse">Ränta och datum</a></td><td>Årsränta, procentenheter och bokföringsdag går att skilja åt.</td></tr>
+<tr><td>Information fungerar i komponenter</td><td><a href="testfall/index.html#konton">Kontotabell</a> och <a href="testfall/sammanhang.html#betalning">betalningsövning</a></td><td>Rubriker, etiketter och knappnamn ger rätt sammanhang.</td></tr>
+<tr><td>Ändrade värden är aktuella överallt</td><td><a href="testfall/sammanhang.html#betalning">Betalningsövning</a></td><td>Fält, sammanställning och knapptext stämmer efter ändringen.</td></tr>
+<tr><td>Kopiering och redigering fungerar</td><td><a href="testfall/identifierare.html#ocr-exempel">OCR-fält och kopieringsknapp</a></td><td>Inledande nollor bevaras, markören fungerar och tomt blir inte noll.</td></tr>
 </tbody></table></div>
-<p>Teststrängarna är endast till för observation. Aktivera inte telefonlänken. De är inte validerade som verkliga OCR-, kort- eller personnummer.</p>
-<h2 id="tekniska-detaljer-finns-for-alla">Tekniska detaljer finns för alla</h2>
-<p>Varje fall har en stängd detaljruta. Öppna den efter att du dokumenterat uppläsningen. Rutorna är tillgängliga även för den som använder skärmläsare; de är inte dolda med aria-hidden.</p>
-<p>Detaljrutorna visar faktisk markup. Teststrängen ändras inte när en ruta öppnas. Ingen JavaScript-kod körs på testsidorna.</p>
-<h2 id="vad-sviten-inte-tacker">Vad sviten inte täcker</h2>
-<p>Sviten är ett stöd för undersökning, inte en fullständig kravgranskning. Komplettera i tjänstens riktiga gränssnitt med inmatning, kopiering, statusändringar, zoom, små vyer, relevanta gränsvärden, mobil och punktskrift.</p></main>
-<footer><p>Version 3 · 22 oktober 2026 · <a href="kallor.html">Källor och faktakontroll</a></p>
+<h2 id="bedom-det-du-hor">Bedöm det du hör</h2>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Tabell: Bedöm det du hör"><table><thead><tr>
+<th scope="col">Observation</th>
+<th scope="col">Bedömning</th>
+</tr></thead><tbody>
+<tr><td>Telefonnumret läses i grupper eller decimaldelen som ören</td><td>Okej om rätt information går att förstå och kontrollera.</td></tr>
+<tr><td>Ett långt OCR-nummer behöver teckennavigering</td><td>Kan vara okej om hela numret går att kontrollera praktiskt.</td></tr>
+<tr><td>Ett vanligt saldo kräver teckennavigering för att förstås</td><td>Behöver utredas.</td></tr>
+<tr><td>Minus, en siffra eller nödvändigt sammanhang saknas</td><td>Inte godkänt för den aktuella kontrollen.</td></tr>
+<tr><td>Talvisaren visar rätt text men det hörda talet är oklart</td><td>Behöver utredas. Talvisaren räcker inte som underlag.</td></tr>
+</tbody></table></div>
+<h2 id="prova-aven-gransfallen">Prova även gränsfallen</h2>
+<p>Klistra in ett OCR-nummer med inledande nolla och mellanslag. Redigera mitt i fältet och töm det. Kopiera till ett annat fält och jämför. Byt konto, belopp och valuta i betalningsövningen. Använd smal skärm och förstoring och kontrollera att hela uppgiften går att nå.</p>
+<p>Exemplen ersätter inte testning av bankens faktiska komponenter, formatregler och flöden. Anteckna testdata, produktversion, operativsystem, webbläsare, skärmläsare, röst, relevanta inställningar och ditt resultat.</p></main>
+<footer><p>Version 4 · 27 oktober 2026 · <a href="kallor.html">Källor</a></p>
 <p><a href="https://github.com/FagerKod/siffror/blob/main/content/testfall.md">Dokumentets källfil på GitHub</a></p></footer>
 </body>
 </html>
+

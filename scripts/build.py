@@ -111,8 +111,9 @@ def main():
         page = page.replace('{{source}}', path.name)
         (ROOT / 'docs' / (path.stem + '.html')).write_text(page)
     (ROOT / 'docs/.nojekyll').touch()
-    print('Byggde 7 dokumentsidor. Testfall ligger i docs/testfall/.')
+    print('Byggde dokumentsidor från content/. Körbara exempel ligger i docs/testfall/.')
 
 
 if __name__ == '__main__':
     main()
+

@@ -33,3 +33,24 @@ tr:nth-child(even) td { background: #f6f8f9; }
 footer { border-top: 1px solid #c4ced4; font-size: .9rem; color: #485964; margin-top: 3rem; padding-bottom: 3rem; }
 @media (max-width: 40rem) { .toc ul { columns: 1; } th, td { padding: .5rem; } table { min-width: 34rem; } }
 @media print { header, .skip, .toc, footer { display: none; } body { background: white; color: black; } main { max-width: none; padding: 0; } h1 { font-size: 24pt; } h2 { break-after: avoid; } a { color: inherit; } table { min-width: 0; font-size: 9pt; } tr, pre { break-inside: avoid; } .table-scroll { overflow: visible; } }
+
+.demo { background: #fff; border: 1px solid #c4ced4; border-radius: .4rem; padding: clamp(.75rem, 3vw, 1.5rem); margin-block: 1rem; }
+.value { font-size: 1.3rem; }
+.number, .value { overflow-wrap: anywhere; }
+label { display: block; font-weight: 650; margin-top: 1rem; }
+input, select, button { font: inherit; max-width: 100%; min-height: 44px; border: 1px solid #637786; border-radius: .25rem; padding: .5rem .75rem; color: #202b36; background: white; }
+input { width: 100%; max-width: 30rem; }
+button { cursor: pointer; margin: .75rem .5rem .25rem 0; background: #163c57; color: white; white-space: normal; overflow-wrap: anywhere; }
+button:hover { background: #28597a; }
+button svg { vertical-align: middle; }
+summary { cursor: pointer; padding: .75rem 0; font-weight: 650; }
+details { margin-block: 1rem; }
+caption { text-align: left; font-weight: 650; padding-bottom: .5rem; }
+.error:not(:empty) { border-left: 4px solid #202b36; padding-left: .75rem; font-weight: 650; }
+[aria-invalid="true"] { border-width: 2px; }
+[role="status"]:empty, .error:empty { margin: 0; }
+section { margin-bottom: 3rem; }
+
+fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+legend { font-weight: 650; }
+button:disabled { opacity: .65; cursor: default; }

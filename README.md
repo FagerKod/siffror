@@ -1,39 +1,35 @@
-# Siffror och tal med skärmläsare
+# Siffror och skärmläsare
 
-En gemensam vägledning med delar för testare och utvecklare, kompletterad med 21 testfall, testmanual, resultatmall och källgranskning.
+Webbfördjupning till Confluence-kortguiden med krav, implementation och förväntat testresultat. Kortguiden ändras inte av webbbygget.
 
-## Redigera och kontrollera
+Webbplats: https://fagerkod.github.io/siffror/
 
-Dokumentens källor finns i `content/`. Kör efter redigering:
+## Innehåll
+
+- `content/`: webbtexter om principer, exempelöversikt, utveckling och skärmläsare.
+- `docs/testfall/`: tre körbara övningssidor. HTML redigeras direkt.
+- `docs/examples.js`: lokal OCR- och betalningsövning utan nätverksanrop eller lagring.
+- `docs/`: publiceringsmappen för GitHub Pages.
+- `underlag/`: historiskt underlag utanför webbplatsen.
+
+De äldre undersökningsfallen och resultatsidorna ingår inte i webbplatsen. Git-historiken bevarar tidigare versioner.
+
+## Bygg och kontrollera
 
 ```sh
 python3 scripts/build.py
-python3 scripts/verifiera.py
 python3 scripts/check_site.py
+node scripts/test_examples.cjs
 ```
 
-Byggaren kräver Python 3.8 eller senare och inga paket. Den stöder en avgränsad Markdown-dialekt: rubriker, stycken, kodblock, platta listor, tabeller, länkar, fetstil och inline-kod. Lägg inte in rå HTML eller nästlade listor i dokumentkällorna.
-
-Testsidornas HTML i `docs/testfall/` redigeras direkt. Bevara exakta teckenreferenser och test-ID:n. `scripts/verifiera.py` kontrollerar de ursprungliga strängarna och testmekanismerna. Det är inte ett uppläsningstest.
-
-## Öppna lokalt
+Byggaren använder endast Pythons standardbibliotek och omvandlar webbtexterna i `content/` till HTML. Vid ändringar i krav: uppdatera webbtext, motsvarande övning och förväntat resultat tillsammans. `scripts/verifiera.py` kör också den aktuella sidkontrollen.
 
 ```sh
 python3 -m http.server 8000 --directory docs
 ```
 
-Öppna `http://localhost:8000/`. HTML-filerna kan också öppnas direkt utan server. Inga externa typsnitt, skript eller analysverktyg används.
+Öppna http://localhost:8000/. Kopieringsknappen kräver en säker webbläsarkontext, exempelvis HTTPS eller localhost, och att webbläsaren tillåter kopiering. Fel visas i statusregionen.
 
-## GitHub Pages
+Pages publicerar `main`, mappen `/docs`. Kör inte bara om byggaren efter att gamla källfiler återställts: publiceringsmappen ska bara innehålla aktuellt innehåll.
 
-Allt publicerbart material finns i `docs/`, inklusive `.nojekyll`. Välj Settings → Pages → Deploy from a branch → main → /docs och spara när sidan ska publiceras. GitHub Pages kan användas från ett privat repo med en plan som stöder det; annars behövs ett offentligt repo. Ändra inte repots synlighet utan ägarens beslut.
-
-Pages-webbplatsen kan bli offentlig även om repot är privat. Nuvarande underlag i `underlag/` ingår inte i webbplatsen. Förväntad adress efter aktivering är `https://fagerkod.github.io/siffror/`; adressen är inte ett påstående om att publicering har genomförts.
-
-Källor: [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) och [publiceringskälla](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
-
-## Ursprung och status
-
-Utgår från den lokala riktlinjen version 2 och befintliga testfall. Originalriktlinje och originalobservationer bevaras i `underlag/` som historik, inte aktuell vägledning.
-
-Version 3 är faktakontrollerad 2026-10-22. Se `content/kallor.md` för rättelser och primärkällor. Nya praktiska skärmläsarkörningar återstår. Inga syntetiska eller automatiskt antagna uppläsningsresultat har lagts till.
+Automatiska kontroller verifierar struktur och funktion, inte faktiskt uttal. Prova även manuellt med NVDA på Windows och VoiceOver i Safari på iPhone samt vid 320 CSS-pixlars bredd och förstoring. Ingen godkänd skärmläsarkörning kan härledas enbart från kodkontrollerna.

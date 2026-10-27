@@ -1,23 +1,28 @@
-# Siffror som går att förstå
+# Siffror och skärmläsare
 
-En gemensam vägledning för att presentera och testa tal, belopp och sifferföljder med skärmläsare.
+Fördjupning och praktiska exempel för testare och React-utvecklare. Utgå från kortguiden i Confluence och prova hur samma information fungerar med din skärmläsare.
 
-**Samma text för alla. Hela uppgiften ska gå att uppfatta och kontrollera. Uttalet behöver inte vara identiskt.**
+**Samma korrekta information ska vara tillgänglig visuellt och för hjälpmedel. Olika uttal är okej om uppgiften går att förstå, kontrollera och använda.**
 
-## Börja här
+## Välj ett område
 
-- [Vägledning för testare](vagledning.html#for-testare) — vad som ska gå att uppfatta och hur du bedömer skillnader i uppläsning.
-- [Vägledning för utvecklare](vagledning.html#for-utvecklare) — text, HTML, formatering, inmatning och undantag.
-- [Läs hela vägledningen](vagledning.html) — samma grundprincip och bedömning för båda målgrupperna.
+| Område | Det får du prova |
+| --- | --- |
+| [Belopp och saldo](testfall/index.html) | Belopp, minus, noll, saknad uppgift, decimaler och flera konton. |
+| [Nummer och inmatning](testfall/identifierare.html) | OCR, kontonummer, IBAN, telefonnummer, maskering och kopiering. |
+| [Komponenter och ändrade värden](testfall/sammanhang.html) | En betalningsövning med konto, belopp, valuta och tillgänglig återkoppling. |
 
-## Undersök i praktiken
+## Så använder du sidan
 
-- [Testfall](testfall.html) — 21 isolerade exempel för jämförelse och observation.
-- [Testmanual](testmanual.html) — arbetsgång, kommandon och dokumentation.
-- [Resultat](resultat.html) — tidigare observationer och tester som återstår.
+1. Läs kravet och vad exemplet ska förmedla.
+2. Starta NVDA på Windows eller VoiceOver på iPhone. Följ [kom igång med skärmläsare](testmanual.html).
+3. Läs och använd det fungerande exemplet. Kontrollera informationen och funktionen, inte ett bestämt uttal.
+4. Öppna HTML-exemplet och läs förklaringen för utvecklare.
 
-## Om underlaget
+Exemplen använder påhittade uppgifter och genomför inga betalningar. Inmatningen behandlas endast på sidan och sparas inte. Använd exempeluppgifter när du provar. Telefonlänken kan öppna telefonens samtalsfunktion; du behöver inte ringa för att testa den.
 
-Version 3, 22 oktober 2026. [Källor och faktakontroll](kallor.html) visar stödet för regler och tekniska råd, samt vad som rättats från den tidigare manualen.
+## Från kortguide till fördjupning
 
-De tidigare skärmläsarkörningarna saknar fullständig miljöinformation. Den här versionen innehåller inga nya påståenden om praktiskt verifierat uttal.
+Confluence är den kortfattade guiden med krav, implementation och förväntat testresultat. Här finns samma principer omsatta i exempel och övningar. [Översikten](testfall.html) visar vilket exempel som hör till vilket krav. [För utvecklare](vagledning.html) förklarar HTML, React och formatering.
+
+Sidan visar implementationsmönster. Ett visst uttal eller ett godkänt resultat i din miljö är inte utlovat. Lyssna och kontrollera med de versioner, röster och inställningar som ska stödjas i tjänsten.

@@ -1,0 +1,33 @@
+const assert = require('node:assert/strict');
+const {normalizeOcr, parseAmount, formatAmount} = require('../docs/examples.js');
+assert.deepEqual(normalizeOcr('0012 3456\u00a07890'), {value:'001234567890'});
+assert.ok(normalizeOcr('').error);
+assert.ok(normalizeOcr('12a34').error);
+assert.equal(parseAmount('1 234,50').cents, 123450n);
+assert.equal(parseAmount('0001,5').cents, 150n);
+assert.equal(parseAmount('999 999 999,99').cents, 99999999999n);
+for (const value of ['', '0', '-1', '1,234', '12 34', '1e5', '1000000000']) assert.ok(parseAmount(value).error, value);
+assert.equal(formatAmount(123450n,'SEK'), '1 234,50 kr');
+assert.equal(formatAmount(123450n,'EUR'), '1 234,50 EUR');
+// Exercise the actual event handlers with minimal DOM objects, including failure paths.
+const fs=require('node:fs'), vm=require('node:vm');
+const ids=['ocr-fields','payment-fields','ocr-form','ocr','ocr-error','ocr-status','ocr-preview','copy-ocr','payment-form','amount','account','currency','payment-summary','pay','payment-error','payment-status'];
+const elements=Object.fromEntries(ids.map(id=>[id,{value:'',textContent:'',attrs:{},handlers:{},addEventListener(e,fn){this.handlers[e]=fn},setAttribute(k,v){this.attrs[k]=v},removeAttribute(k){delete this.attrs[k]},focus(){this.focused=true}}]));
+elements.ocr.value='0012 3456';elements.amount.value='1 234,50';elements.account.value='Lönekonto';elements.currency.value='SEK';
+let copied,failCopy=false;
+const context={document:{getElementById:id=>elements[id]},navigator:{clipboard:{async writeText(v){if(failCopy)throw Error('denied');copied=v}}}};
+vm.runInNewContext(fs.readFileSync(require.resolve('../docs/examples.js'),'utf8'),context);
+const fire=(id,event)=>elements[id].handlers[event]({preventDefault(){}});
+(async()=>{
+ assert.equal(elements.pay.textContent,'Betala 1 234,50 kr');
+ elements.account.value='Sparkonto';fire('account','change');elements.currency.value='EUR';fire('currency','change');
+ fire('payment-form','submit');assert.match(elements['payment-status'].textContent,/Sparkonto: 1 234,50 EUR/);
+ elements.amount.value='';fire('amount','input');assert.equal(elements['payment-status'].textContent,'');assert.match(elements['payment-summary'].textContent,/Belopp saknas/);
+ fire('payment-form','submit');assert.equal(elements.amount.attrs['aria-invalid'],'true');assert.ok(elements.amount.focused);
+ elements.amount.value='2,50';fire('amount','input');assert.equal(elements.pay.textContent,'Betala 2,50 EUR');assert.equal(elements.amount.value,'2,50');
+ fire('ocr-form','submit');assert.match(elements['ocr-status'].textContent,/00123456/);assert.equal(elements.ocr.value,'0012 3456');
+ await fire('copy-ocr','click');assert.equal(copied,'0012 3456');assert.match(elements['ocr-status'].textContent,/har kopierats/);
+ failCopy=true;await fire('copy-ocr','click');assert.match(elements['ocr-status'].textContent,/lyckades inte/);
+ elements.ocr.value='';fire('ocr','input');assert.equal(elements['ocr-preview'].textContent,'Ingen uppgift angiven');fire('ocr-form','submit');assert.equal(elements.ocr.attrs['aria-invalid'],'true');
+ console.log('OK: beloppsprecision, tomt/noll, OCR, kopiering och uppdateringar inklusive felvägar.');
+})();

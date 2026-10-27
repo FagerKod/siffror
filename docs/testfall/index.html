@@ -1,119 +1,53 @@
 <!doctype html>
-<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Del ett: belopp och identifierare | Siffror</title><style>
-  body {
-    max-width: 44rem;
-    margin: 2rem auto;
-    padding: 0 1rem 4rem;
-    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-    line-height: 1.6;
-    color: #1a1a1a;
-    background: #fff;
-  }
-  section { margin: 0 0 3.5rem; }
-  h1 { line-height: 1.3; }
-  h2 { margin-bottom: 0.25rem; }
-  .teststrang { font-size: 1.6rem; margin: 1.25rem 0; }
-  .lyssna { color: #444; }
-  nav ul { padding-left: 1.25rem; }
-  .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    white-space: nowrap;
-    border: 0;
-  }
-  .teknik {
-    margin: 1.5rem 0 0;
-    padding: 0.75rem 1rem;
-    border-left: 4px solid #c9c9c9;
-    background: #f6f6f6;
-    font-size: 0.9rem;
-    color: #333;
-  }
-  .teknik-rubrik {
-    margin: 0 0 0.5rem;
-    font-weight: 600;
-    text-transform: none;
-    color: #555;
-  }
-  .teknik pre {
-    margin: 0 0 0.75rem;
-    padding: 0.5rem 0.75rem;
-    background: #fff;
-    border: 1px solid #ddd;
-    overflow-x: auto;
-    font-size: 0.85rem;
-    line-height: 1.5;
-  }
-  .teknik dl { margin: 0; }
-  .teknik dt { font-weight: 600; margin-top: 0.5rem; }
-  .teknik dd { margin: 0 0 0 0; }
-  .teknik table { border-collapse: collapse; margin-top: 0.5rem; }
-  .teknik th, .teknik td {
-    text-align: left;
-    vertical-align: top;
-    padding: 0.25rem 0.75rem 0.25rem 0;
-    border-bottom: 1px solid #e0e0e0;
-  }
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Belopp och saldo · Siffror</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<a class="skip" href="#main">Hoppa till innehållet</a>
+<header><a class="brand" href="../index.html">Siffror</a><p>Lär dig och prova med skärmläsare</p>
+<nav aria-label="Huvudmeny"><ul>
+<li><a href="../vagledning.html">För utvecklare</a></li>
+<li><a href="../testfall.html">Exempel</a></li>
+<li><a href="../testmanual.html">Prova med skärmläsare</a></li>
 
-:focus-visible { outline: 3px solid #774200; outline-offset: 4px; }
-summary { cursor: pointer; padding: .5rem 0; }
-pre { white-space: pre-wrap; overflow-wrap: anywhere; }
-.teststrang { font-size: clamp(1.1rem, 4vw, 1.6rem); }
-.skip { position: absolute; top: -6rem; } .skip:focus { top: 0; background: white; }
-</style></head>
-<body><a class="skip" href="#main">Hoppa till testfallen</a>
-<header><p><a href="../index.html">Siffror</a> / <a href="../testfall.html">Alla testfall</a></p></header>
-<main id="main"><h1>Del ett: belopp och identifierare</h1>
-<p>Version 3. Läs först i löpande läsning, sedan genom navigering. Dokumentera paneltext och faktiskt hört tal separat. Följ <a href="../testmanual.html">testmanualen</a>.</p>
-<p>Låt de tekniska detaljerna vara stängda tills du dokumenterat observationen. Alla kan öppna dem efteråt. Teststrängarna är endast till för observation; aktivera inte telefonlänken. Testknappen genomför ingen betalning. Tc-06 och tc-07 är teknikjämförelser och ska inte kopieras som standardlösningar.</p>
-<nav><h2>Testfall på sidan</h2><ul><li><a href="#tc-01">tc-01</a></li><li><a href="#tc-02">tc-02</a></li><li><a href="#tc-03">tc-03</a></li><li><a href="#tc-04">tc-04</a></li><li><a href="#tc-05">tc-05</a></li><li><a href="#tc-06">tc-06</a></li><li><a href="#tc-07">tc-07</a></li></ul></nav>
-<section id="tc-01">
-<h2>tc-01, belopp A</h2>
-  <!-- Separator: U+00A0, hårt mellanslag, skrivet som &#160;. Får inte bytas mot vanligt blanksteg. -->
-  <p class="teststrang" data-tc="tc-01">1&#160;345&#160;876&#160;kr</p>
-  <p class="lyssna">Lyssna efter: uppfattas detta som ett sammanhängande tal eller som flera separata tal?</p>
-<details class="teknik"><summary>Tekniska detaljer för tc-01</summary><p>Jämför värde eller sifferföljd, enhet och sammanhang. Bedöm enligt vägledningen; något visst uttal är inte förutbestämt.</p><pre><code>&lt;p class=&quot;teststrang&quot; data-tc=&quot;tc-01&quot;&gt;1&amp;#160;345&amp;#160;876&amp;#160;kr&lt;/p&gt;</code></pre></details>
-</section><section id="tc-02">
-<h2>tc-02, belopp B</h2>
-  <!-- Separator: U+0020, vanligt blanksteg. Får inte bytas mot &#160;. -->
-  <p class="teststrang" data-tc="tc-02">1 345 876 kr</p>
-  <p class="lyssna">Lyssna efter: skiljer sig uppläsningen från föregående testfall?</p>
-<details class="teknik"><summary>Tekniska detaljer för tc-02</summary><p>Jämför värde eller sifferföljd, enhet och sammanhang. Bedöm enligt vägledningen; något visst uttal är inte förutbestämt.</p><pre><code>&lt;p class=&quot;teststrang&quot; data-tc=&quot;tc-02&quot;&gt;1 345 876 kr&lt;/p&gt;</code></pre></details>
-</section><section id="tc-03">
-<h2>tc-03, belopp C</h2>
-  <!-- Ingen gruppering. Enda blanksteget är U+0020 före enheten. -->
-  <p class="teststrang" data-tc="tc-03">1345876 kr</p>
-  <p class="lyssna">Lyssna efter: referens, så här låter samma belopp utan gruppering.</p>
-<details class="teknik"><summary>Tekniska detaljer för tc-03</summary><p>Jämför värde eller sifferföljd, enhet och sammanhang. Bedöm enligt vägledningen; något visst uttal är inte förutbestämt.</p><pre><code>&lt;p class=&quot;teststrang&quot; data-tc=&quot;tc-03&quot;&gt;1345876 kr&lt;/p&gt;</code></pre></details>
-</section><section id="tc-04">
-<h2>tc-04, sifferföljd A</h2>
-  <!-- Separator: U+0020, vanligt blanksteg. -->
-  <p class="teststrang" data-tc="tc-04">1234 5678 9012 3456</p>
-  <p class="lyssna">Lyssna efter: går det att uppfatta siffrorna och skriva ner dem?</p>
-<details class="teknik"><summary>Tekniska detaljer för tc-04</summary><p>Jämför värde eller sifferföljd, enhet och sammanhang. Bedöm enligt vägledningen; något visst uttal är inte förutbestämt.</p><pre><code>&lt;p class=&quot;teststrang&quot; data-tc=&quot;tc-04&quot;&gt;1234 5678 9012 3456&lt;/p&gt;</code></pre></details>
-</section><section id="tc-05">
-<h2>tc-05, sifferföljd B</h2>
-  <!-- Ingen separator alls. -->
-  <p class="teststrang" data-tc="tc-05">1234567890123456</p>
-  <p class="lyssna">Lyssna efter: referens, så här låter samma sifferföljd utan gruppering.</p>
-<details class="teknik"><summary>Tekniska detaljer för tc-05</summary><p>Jämför värde eller sifferföljd, enhet och sammanhang. Bedöm enligt vägledningen; något visst uttal är inte förutbestämt.</p><pre><code>&lt;p class=&quot;teststrang&quot; data-tc=&quot;tc-05&quot;&gt;1234567890123456&lt;/p&gt;</code></pre></details>
-</section><section id="tc-06">
-<h2>tc-06, belopp D</h2>
-  <!-- Synlig del: U+00A0. Dold del: ingen gruppering, U+0020 före enheten. -->
-  <p class="teststrang" data-tc="tc-06"><span aria-hidden="true">1&#160;345&#160;876&#160;kr</span><span class="visually-hidden">1345876 kr</span></p>
-  <p class="lyssna">Lyssna efter: vilken av de två varianterna läses upp, och hör du någon del två gånger?</p>
-<details class="teknik"><summary>Tekniska detaljer för tc-06</summary><p>Mekanismjämförelse med två textrepresentationer. Inte rekommenderad standardlösning. Identiskt uttal bevisar inte ensamt vilken nod som lästes.</p><pre><code>&lt;p class=&quot;teststrang&quot; data-tc=&quot;tc-06&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;1&amp;#160;345&amp;#160;876&amp;#160;kr&lt;/span&gt;&lt;span class=&quot;visually-hidden&quot;&gt;1345876 kr&lt;/span&gt;&lt;/p&gt;</code></pre></details>
-</section><section id="tc-07">
-<h2>tc-07, belopp E</h2>
-  <!-- Synlig text: U+00A0. Attributvärdet: ingen gruppering, U+0020 före enheten. -->
-  <p class="teststrang" data-tc="tc-07"><span aria-label="1345876 kr">1&#160;345&#160;876&#160;kr</span></p>
-  <p class="lyssna">Lyssna efter: vilken av de två varianterna läses upp, och beter sig löpande läsning och navigering olika?</p>
-<details class="teknik"><summary>Tekniska detaljer för tc-07</summary><p>Avsiktligt felaktig ARIA-användning: aria-label får inte namnge ett vanligt span. Uppläsningen är en observation, aldrig en godkänd implementationsmall.</p><pre><code>&lt;p class=&quot;teststrang&quot; data-tc=&quot;tc-07&quot;&gt;&lt;span aria-label=&quot;1345876 kr&quot;&gt;1&amp;#160;345&amp;#160;876&amp;#160;kr&lt;/span&gt;&lt;/p&gt;</code></pre></details>
-</section>
-</main><footer><p><a href="../testfall.html">Till alla testfall</a> · <a href="../resultatmall.html">Resultatmall</a></p></footer></body></html>
+</ul></nav></header>
+<main id="main" tabindex="-1"><h1>Belopp och saldo</h1><p>Prova belopp i sitt sammanhang, nödvändiga decimaler och flera konton.</p><p><a href="../testmanual.html">Instruktioner för NVDA och VoiceOver</a>. Bedöm information och funktion, inte ett exakt uttal. Alla uppgifter är exempel.</p><nav aria-label="Exempel på sidan"><ul><li><a href="#belopp">Belopp och konto</a></li><li><a href="#minus">Negativt saldo</a></li><li><a href="#tillstand">Noll och saknad uppgift</a></li><li><a href="#precision">Decimaler och precision</a></li><li><a href="#konton">Flera konton i en tabell</a></li><li><a href="#betydelse">Ränta och datum</a></li></ul></nav><section id="belopp"><h2>Belopp och konto</h2><p><strong>Krav:</strong> Belopp, decimalvärde, valuta och konto ska framgå.</p>
+<h3>Prova själv</h3><div class="demo"><p class="value">Lönekonto, saldo 1 234,50 kr</p></div>
+<p><strong>Gör så här:</strong> Läs raden normalt. Kontrollera sedan decimaldelen vid behov.</p><p><strong>Förväntat resultat:</strong> Det framgår att lönekontots saldo är 1 234 kronor och 50 öre. Decimaldelen får uttryckas på olika begripliga sätt.</p>
+<details><summary>HTML och implementation för belopp och konto</summary><pre><code>&lt;p&gt;Lönekonto, saldo 1 234,50 kr&lt;/p&gt;</code></pre></details></section><section id="minus"><h2>Negativt saldo</h2><p><strong>Krav:</strong> Negativa värden ska skiljas från positiva utan att vara beroende av färg.</p>
+<h3>Prova själv</h3><div class="demo"><p class="value">Saldo −134,50 kr (negativt saldo)</p></div>
+<p><strong>Gör så här:</strong> Läs hela raden med vanlig läsning. Kontrollera att informationen går fram även om rösten inte uttalar tecknet som väntat.</p><p><strong>Förväntat resultat:</strong> Värdet uppfattas som negativt. Både minustecknet och det synliga förtydligandet hör till samma information.</p>
+<details><summary>HTML och implementation för negativt saldo</summary><pre><code>&lt;p&gt;Saldo −134,50 kr (negativt saldo)&lt;/p&gt;</code></pre><p>Minustecknet är U+2212. Det synliga förtydligandet hjälper alla och är ingen separat uttalsversion.</p></details></section><section id="tillstand"><h2>Noll och saknad uppgift</h2><p><strong>Krav:</strong> Noll, saknad uppgift och laddning ska skiljas åt.</p>
+<h3>Prova själv</h3><div class="demo"><ul><li>Lönekonto: 0,00 kr</li><li>Sparkonto: Uppgift saknas</li><li>Valutakonto: Hämtar saldo</li></ul></div>
+<p><strong>Gör så här:</strong> Läs alla tre tillstånd. Här visas laddningstillståndet som ett statiskt exempel, ingen hämtning pågår.</p><p><strong>Förväntat resultat:</strong> Endast lönekontot har ett känt nollsaldo. Saknad uppgift och laddning uppfattas inte som noll.</p>
+<details><summary>HTML och implementation för noll och saknad uppgift</summary><pre><code>&lt;p&gt;Lönekonto: 0,00 kr&lt;/p&gt;
+&lt;p&gt;Sparkonto: Uppgift saknas&lt;/p&gt;
+&lt;p&gt;Valutakonto: Hämtar saldo&lt;/p&gt;</code></pre></details></section><section id="precision"><h2>Decimaler och precision</h2><p><strong>Krav:</strong> Nödvändiga decimaler ska kunna kontrolleras.</p>
+<h3>Prova själv</h3><div class="demo"><p class="value">Andelsvärde: 0,3120 EUR</p><p>Värdet visas med fyra decimaler.</p></div>
+<p><strong>Gör så här:</strong> Läs värdet normalt. Granska sedan alla fyra decimaler, inklusive den sista nollan, med teckennavigering.</p><p><strong>Förväntat resultat:</strong> Rätt decimalvärde och valuta framgår. Den visade precisionen går att kontrollera. Den sista nollan behöver inte sägas i vanlig läsning om den kan granskas när uppgiften kräver det.</p>
+<details><summary>HTML och implementation för decimaler och precision</summary><pre><code>&lt;p&gt;Andelsvärde: 0,3120 EUR&lt;/p&gt;
+&lt;p&gt;Värdet visas med fyra decimaler.&lt;/p&gt;</code></pre></details></section><section id="konton"><h2>Flera konton i en tabell</h2><p><strong>Krav:</strong> Det ska framgå vilket värde som hör till vilket konto och vilken saldotyp.</p>
+<h3>Prova själv</h3><div class="demo"><div class="table-scroll" role="region" aria-label="Konton och saldo" tabindex="0"><table><caption>Konton och tillgängliga belopp</caption><thead><tr><th scope="col">Konto</th><th scope="col">Saldo</th><th scope="col">Disponibelt belopp</th></tr></thead><tbody><tr><th scope="row">Lönekonto</th><td>1 234,50 kr</td><td>1 034,50 kr</td></tr><tr><th scope="row">Sparkonto</th><td>1 345 876,50 kr</td><td>1 345 876,50 kr</td></tr></tbody></table></div></div>
+<p><strong>Gör så här:</strong> Använd tabellnavigering och jämför lönekontots saldo med disponibelt belopp. Prova även smal skärm och förstoring.</p><p><strong>Förväntat resultat:</strong> Rad- och kolumnrubriker gör att värdena kan kopplas rätt. Hela det stora beloppet går att nå. Tabellen kan vid behov rullas horisontellt utan att information kapas.</p>
+<details><summary>HTML och implementation för flera konton i en tabell</summary><pre><code>&lt;table&gt;
+  &lt;caption&gt;Konton och tillgängliga belopp&lt;/caption&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Konto&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Saldo&lt;/th&gt;
+    &lt;th scope=&quot;col&quot;&gt;Disponibelt belopp&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;&lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Lönekonto&lt;/th&gt;&lt;td&gt;1 234,50 kr&lt;/td&gt;
+    &lt;td&gt;1 034,50 kr&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;
+&lt;/table&gt;</code></pre><p>Kodutdraget visar första raden; samma struktur används för sparkontot.</p></details></section><section id="betydelse"><h2>Ränta och datum</h2><p><strong>Krav:</strong> Enhet och betydelse ska framgå.</p>
+<h3>Prova själv</h3><div class="demo"><p>Årsränta: 2,50 %</p><p>Räntan ökar från 2,50 % till 2,75 %, en ökning med 0,25 procentenheter.</p><p>Bokföringsdag: <time datetime="2026-10-27">27 oktober 2026</time></p></div>
+<p><strong>Gör så här:</strong> Läs värdena och deras etiketter.</p><p><strong>Förväntat resultat:</strong> Årsränta och förändring i procentenheter går att skilja åt. Datumet uppfattas som bokföringsdag.</p>
+<details><summary>HTML och implementation för ränta och datum</summary><pre><code>&lt;p&gt;Årsränta: 2,50 %&lt;/p&gt;
+&lt;p&gt;Räntan ökar från 2,50 % till 2,75 %,
+  en ökning med 0,25 procentenheter.&lt;/p&gt;
+&lt;p&gt;Bokföringsdag: &lt;time datetime=&quot;2026-10-27&quot;&gt;27 oktober 2026&lt;/time&gt;&lt;/p&gt;</code></pre></details></section></main>
+<footer><p>Version 4 · 27 oktober 2026 · <a href="../kallor.html">Källor</a></p>
+<p><a href="https://github.com/FagerKod/siffror/blob/main/docs/testfall/index.html">Dokumentets källfil på GitHub</a></p></footer>
+</body>
+</html>
+
